@@ -15,33 +15,45 @@
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
   body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5}
-  a{color:var(--accent-d);text-decoration:none}
-  a:hover{text-decoration:underline}
+  a{color:var(--accent-d);text-decoration:none} a:hover{text-decoration:underline}
+
+  /* Login gate */
+  .gate{position:fixed;inset:0;background:linear-gradient(135deg,#0f172a,#1e293b);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px}
+  .gate.hide{display:none}
+  .gatecard{background:#fff;border-radius:16px;padding:34px 30px;width:min(420px,100%);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+  .gatecard .logo{width:46px;height:46px;border-radius:11px;background:linear-gradient(135deg,#6366f1,#22d3ee);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;color:#fff;margin-bottom:16px}
+  .gatecard h1{font-size:20px;margin:0 0 4px}
+  .gatecard p{color:var(--muted);font-size:13px;margin:0 0 20px}
+  .gatecard label{font-size:12px;font-weight:700;color:#334155;display:block;margin:14px 0 5px}
+  .gatecard input{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:9px;font-size:14px}
+  .gatecard input:focus{outline:2px solid var(--accent);border-color:var(--accent)}
+  .gatebtn{width:100%;margin-top:20px;padding:12px;border:none;border-radius:9px;background:var(--accent);color:#fff;font-weight:700;font-size:14px;cursor:pointer}
+  .gatebtn:hover{background:var(--accent-d)}
+  .gateerr{color:#dc2626;font-size:12px;margin-top:8px;display:none}
+  .gatenote{font-size:11px;color:#94a3b8;margin-top:16px;line-height:1.45}
 
   /* Header */
-  header{background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;padding:18px 24px}
+  header{background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;padding:16px 24px}
   .head-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;max-width:1400px;margin:0 auto}
   .brand{display:flex;align-items:center;gap:12px}
   .logo{width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,#6366f1,#22d3ee);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px}
   h1{font-size:17px;margin:0;font-weight:700}
   .sub{font-size:12px;color:#94a3b8;margin-top:2px}
-  .meta{display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#cbd5e1}
+  .acct{font-size:12px;color:#cbd5e1;text-align:right}
+  .acct b{color:#fff} .acct a{color:#93c5fd;cursor:pointer}
+  .meta{display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:#cbd5e1;margin-top:10px;max-width:1400px;margin-left:auto;margin-right:auto}
   .meta b{color:#fff;font-size:14px;display:block}
 
   .demo-banner{background:#fef9c3;color:#854d0e;font-size:12.5px;text-align:center;padding:7px 16px;border-bottom:1px solid #fde68a;font-weight:600}
-
   .wrap{max-width:1400px;margin:0 auto;padding:20px 24px 60px}
 
-  /* Tabs */
   .tabs{display:flex;gap:6px;margin-bottom:18px}
   .tab{padding:8px 16px;border-radius:8px;border:1px solid var(--line);background:#fff;cursor:pointer;font-weight:600;font-size:13px;color:var(--muted)}
   .tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
 
-  /* Summary cards */
   .summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:20px}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:var(--shadow)}
   .card .lab{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700}
-  .card .big{font-size:28px;font-weight:800;margin-top:4px}
   .tier-pills{display:flex;gap:8px;margin-top:8px}
   .tier-pill{flex:1;text-align:center;border-radius:8px;padding:6px 4px;font-weight:800}
   .tp-a{background:var(--a-bg);color:var(--a)} .tp-b{background:var(--b-bg);color:var(--b)} .tp-c{background:var(--c-bg);color:var(--c)}
@@ -49,10 +61,8 @@
   .card.feature{background:linear-gradient(135deg,#eef2ff,#faf5ff);border-color:#ddd6fe}
   .card.feature .name{font-weight:800;font-size:16px;margin-top:2px}
   .card.feature .why{font-size:12.5px;color:#475569;margin-top:4px}
-  .top5{margin-top:6px}
-  .top5 li{margin:3px 0;font-size:13px}
+  .top5{margin-top:6px;padding-left:18px} .top5 li{margin:3px 0;font-size:13px}
 
-  /* Controls */
   .controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
   .search{flex:1;min-width:200px;padding:9px 12px;border:1px solid var(--line);border-radius:9px;font-size:13px;background:#fff}
   .chips{display:flex;gap:6px;flex-wrap:wrap}
@@ -62,54 +72,105 @@
   .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
   .btn:hover{filter:brightness(.97)}
 
-  /* Table */
   .tablewrap{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
   table{width:100%;border-collapse:collapse}
   th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);font-size:13px}
   th{background:#f8fafc;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);cursor:pointer;user-select:none;white-space:nowrap;position:sticky;top:0;z-index:1}
   th .arr{opacity:.4;font-size:10px}
-  tbody tr{cursor:pointer;transition:background .12s}
-  tbody tr:hover{background:#f8fafc}
-  td .bname{font-weight:700}
-  td .bsub{font-size:11px;color:var(--muted)}
+  tbody tr{cursor:pointer;transition:background .12s} tbody tr:hover{background:#f8fafc}
+  td .bname{font-weight:700} td .bsub{font-size:11px;color:var(--muted)}
   .badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:800}
   .t-A{background:var(--a-bg);color:var(--a)} .t-B{background:var(--b-bg);color:var(--b)} .t-C{background:var(--c-bg);color:var(--c)}
   .g-local{background:var(--local-bg);color:var(--local)} .g-interstate{background:var(--inter-bg);color:var(--inter)} .g-international{background:var(--intl-bg);color:var(--intl)}
   .fit{font-weight:800;font-size:15px}
-  .presence{font-weight:700}
   .dd{font-size:10px;background:#0f172a;color:#fff;padding:1px 6px;border-radius:5px;font-weight:700;margin-left:6px}
   .stat{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;background:#f1f5f9;color:#475569}
   .count{font-size:12px;color:var(--muted);margin:10px 2px}
 
-  /* Detail panel */
+  /* Quick panel */
   .overlay{position:fixed;inset:0;background:rgba(15,23,42,.45);opacity:0;pointer-events:none;transition:opacity .2s;z-index:40}
   .overlay.on{opacity:1;pointer-events:auto}
-  .panel{position:fixed;top:0;right:0;height:100%;width:min(480px,100%);background:#fff;box-shadow:-8px 0 30px rgba(15,23,42,.2);transform:translateX(100%);transition:transform .25s ease;z-index:50;overflow-y:auto}
+  .panel{position:fixed;top:0;right:0;height:100%;width:min(440px,100%);background:#fff;box-shadow:-8px 0 30px rgba(15,23,42,.2);transform:translateX(100%);transition:transform .25s ease;z-index:50;overflow-y:auto}
   .panel.on{transform:translateX(0)}
-  .phead{padding:20px 22px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:2}
+  .phead{padding:20px 22px;border-bottom:1px solid var(--line)}
   .pclose{position:absolute;top:16px;right:18px;border:none;background:#f1f5f9;width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:16px;color:var(--muted)}
   .pbadges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
-  .pname{font-size:20px;font-weight:800;margin:0;padding-right:36px}
-  .pmeta{font-size:12.5px;color:var(--muted);margin-top:6px;display:flex;gap:8px;flex-wrap:wrap}
-  .pfit{position:absolute;top:18px;right:60px;text-align:right}
-  .pfit .n{font-size:26px;font-weight:800;line-height:1}
-  .pfit .l{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
-  .pbody{padding:20px 22px}
-  .sec{margin-bottom:18px}
-  .sec h3{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:0 0 6px}
+  .pname{font-size:19px;font-weight:800;margin:0;padding-right:36px}
+  .pmeta{font-size:12.5px;color:var(--muted);margin-top:6px}
+  .pbody{padding:18px 22px}
+  .pbody .openbtn{width:100%;padding:13px;font-size:14px;margin-bottom:16px}
+  .sec{margin-bottom:16px} .sec h3{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:0 0 6px}
   .sec p{margin:0;font-size:13.5px}
-  .sig{display:flex;gap:8px;margin-bottom:9px;font-size:13px}
-  .sig .dot{color:var(--accent);font-weight:800;flex-shrink:0}
-  .sig a{font-size:11.5px}
-  .hookbox{background:#eef2ff;border:1px solid #ddd6fe;border-radius:10px;padding:14px;position:relative}
-  .hookbox p{font-size:13.5px;font-style:italic;color:#312e81}
-  .copy{margin-top:10px;font-size:12px;padding:6px 12px;border-radius:7px;border:1px solid var(--accent);background:#fff;color:var(--accent-d);cursor:pointer;font-weight:700}
-  .kv{display:grid;grid-template-columns:130px 1fr;gap:6px 12px;font-size:13px}
-  .kv .k{color:var(--muted);font-weight:600}
-  .srclist a{display:block;font-size:12px;margin-bottom:4px;word-break:break-all}
-  .statussel{padding:7px 10px;border-radius:8px;border:1px solid var(--line);font-size:13px;font-weight:600}
 
-  /* Email digest */
+  /* DOSSIER (full document) */
+  .dossier{position:fixed;inset:0;background:var(--bg);z-index:60;overflow-y:auto;display:none}
+  .dossier.on{display:block}
+  .dtop{position:sticky;top:0;background:#0f172a;color:#fff;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;z-index:5}
+  .dtop .dt-name{font-size:17px;font-weight:800}
+  .dtop .dt-sub{font-size:12px;color:#94a3b8}
+  .dtop .dt-actions{display:flex;gap:8px}
+  .dtop .btn{background:#1e293b;color:#fff;border-color:#334155}
+  .dwrap{max-width:920px;margin:0 auto;padding:26px 24px 80px}
+  .dhero{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;box-shadow:var(--shadow);margin-bottom:22px}
+  .dhero .row1{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+  .dhero h2{margin:0;font-size:26px}
+  .dhero .tags{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+  .dhero .scorebox{text-align:center;background:#eef2ff;border:1px solid #ddd6fe;border-radius:12px;padding:12px 18px;min-width:96px}
+  .dhero .scorebox .n{font-size:32px;font-weight:800;line-height:1;color:#4f46e5}
+  .dhero .scorebox .l{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:#6366f1;font-weight:700}
+  .dhero .quickfacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:18px;border-top:1px solid var(--line);padding-top:16px}
+  .qf .k{font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:700}
+  .qf .v{font-size:14px;font-weight:600;margin-top:2px}
+
+  .dsec{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px;box-shadow:var(--shadow);margin-bottom:18px}
+  .dsec > h3{margin:0 0 14px;font-size:16px;display:flex;align-items:center;gap:9px}
+  .dsec > h3 .ic{width:26px;height:26px;border-radius:7px;background:#eef2ff;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .dsec p{font-size:14px;margin:0 0 10px}
+  .dsec p:last-child{margin-bottom:0}
+  .lead-quote{font-size:15px;line-height:1.6;color:#1e293b}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:680px){.grid2{grid-template-columns:1fr}}
+  .audit{border:1px solid var(--line);border-radius:10px;padding:13px 15px}
+  .audit .ah{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:13.5px;margin-bottom:6px}
+  .audit .meter{height:6px;background:#e2e8f0;border-radius:4px;overflow:hidden;margin:6px 0}
+  .audit .meter span{display:block;height:100%;background:linear-gradient(90deg,#6366f1,#22d3ee)}
+  .audit .det{font-size:12.5px;color:#475569}
+
+  .opp{border-left:3px solid var(--accent);padding:4px 0 4px 14px;margin-bottom:16px}
+  .opp .ot{font-weight:700;font-size:14.5px}
+  .opp .od{font-size:13.5px;color:#334155;margin:4px 0}
+  .src-tag{font-size:11.5px;color:var(--accent-d)}
+
+  .bullets{margin:0;padding-left:18px} .bullets li{font-size:13.5px;margin-bottom:7px}
+  .bullets li a{font-size:11.5px}
+  .kv2{display:grid;grid-template-columns:150px 1fr;gap:8px 14px;font-size:13.5px}
+  .kv2 .k{color:var(--muted);font-weight:600}
+
+  .pkg{background:linear-gradient(135deg,#ecfdf5,#eef2ff);border:1px solid #bbf7d0;border-radius:12px;padding:16px 18px}
+  .pkg .pn{font-weight:800;font-size:16px} .pkg .pp{font-size:20px;font-weight:800;color:#16a34a;margin:4px 0}
+  .risk{background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:12px 14px;font-size:13px;color:#991b1b}
+
+  /* Email generator */
+  .emailgen{border:2px solid var(--accent);border-radius:14px;overflow:hidden}
+  .eg-head{background:#eef2ff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+  .eg-head .t{font-weight:800;font-size:15px}
+  .eg-controls{display:flex;gap:6px;flex-wrap:wrap;padding:12px 18px;border-bottom:1px solid var(--line)}
+  .eg-controls .grp{display:flex;gap:4px;align-items:center}
+  .eg-controls .gl{font-size:11px;color:var(--muted);font-weight:700;margin-right:2px}
+  .toggle{padding:5px 11px;border-radius:7px;border:1px solid var(--line);background:#fff;font-size:12px;font-weight:600;cursor:pointer;color:var(--muted)}
+  .toggle.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .eg-body{padding:16px 18px}
+  .eg-body label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;display:block;margin:0 0 4px}
+  .eg-body input,.eg-body textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px 12px;font-size:13.5px;font-family:inherit;margin-bottom:14px}
+  .eg-body textarea{min-height:230px;line-height:1.6;resize:vertical}
+  .eg-actions{display:flex;gap:8px;flex-wrap:wrap}
+  .eg-note{font-size:11.5px;color:var(--muted);margin-top:10px}
+
+  .srclist a{display:block;font-size:12.5px;margin-bottom:5px;word-break:break-all}
+  .statussel{padding:8px 11px;border-radius:8px;border:1px solid var(--line);font-size:13px;font-weight:600}
+  .lightnote{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:13px 15px;font-size:13px;color:#854d0e}
+
   #digest{display:none}
   .mailframe{max-width:680px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
   .mailhead{background:#0f172a;color:#fff;padding:22px 26px}
@@ -121,14 +182,39 @@
   .mailcard .mn{font-weight:800;font-size:15px}
   .mailcard .mw{font-size:12.5px;color:#475569;margin:5px 0}
   .mailcard .mh{font-size:13px;font-style:italic;color:#312e81;background:#eef2ff;padding:9px 11px;border-radius:8px;margin-top:8px}
-  .mailcard .mc{font-size:12px;color:var(--muted);margin-top:7px}
   .digest-actions{text-align:center;margin-bottom:16px}
 
   footer{text-align:center;color:var(--muted);font-size:11.5px;padding:24px}
   @media(max-width:640px){th:nth-child(3),td:nth-child(3),th:nth-child(5),td:nth-child(5){display:none}}
+
+  @media print{
+    body{background:#fff}
+    .gate,header,.demo-banner,.wrap,.overlay,.panel,.dtop{display:none !important}
+    .dossier{position:static;display:block !important;background:#fff}
+    .dwrap{max-width:100%;padding:0}
+    .dsec,.dhero,.emailgen{box-shadow:none;break-inside:avoid;border-color:#cbd5e1}
+    .eg-controls,.eg-actions,.eg-note{display:none !important}
+  }
 </style>
 </head>
 <body>
+
+<!-- LOGIN GATE -->
+<div class="gate" id="gate">
+  <div class="gatecard">
+    <div class="logo">LE</div>
+    <h1>Sign in to your Lead Engine</h1>
+    <p>Your email becomes where the daily digest is delivered and the signature on your outreach drafts. Nothing is ever sent without you.</p>
+    <label for="gEmail">Your email *</label>
+    <input id="gEmail" type="email" placeholder="you@yourbusiness.com" autocomplete="email">
+    <label for="gBiz">Business name (optional)</label>
+    <input id="gBiz" type="text" placeholder="e.g. Capri Media">
+    <div class="gateerr" id="gErr">Please enter a valid email address.</div>
+    <button class="gatebtn" onclick="doLogin()">Enter dashboard →</button>
+    <div class="gatenote">This is a lightweight sign-in (no password, stored only in this browser) — it sets your delivery address and personalises the dashboard. It is not secure authentication.</div>
+  </div>
+</div>
+
 <header>
   <div class="head-row">
     <div class="brand">
@@ -138,15 +224,18 @@
         <div class="sub">Pitch-ready intelligence · public info only · every signal cited</div>
       </div>
     </div>
-    <div class="meta">
-      <div><b id="runDate">30 May 2026</b>Run date</div>
-      <div><b id="runLoc">Perth metro + interstate/intl</b>Target area</div>
-      <div><b id="runMix">16 · 6 · 3</b>Local · Interstate · Intl</div>
-      <div><b id="runTotal">25</b>Leads · 10 deep-dived</div>
+    <div class="acct">
+      Signed in as <b id="acctEmail">—</b><br><a onclick="doLogout()">Log out</a>
     </div>
   </div>
+  <div class="meta">
+    <div><b id="runDate">30 May 2026</b>Run date</div>
+    <div><b id="runLoc">Perth metro + interstate/intl</b>Target area</div>
+    <div><b id="runMix">16 · 6 · 3</b>Local · Interstate · Intl</div>
+    <div><b id="runTotal">25</b>Leads · 10 deep-dived</div>
+  </div>
 </header>
-<div class="demo-banner">⚙️ SAMPLE INTERFACE — these 25 leads are placeholder demo data to show the live UI. They get replaced with your real, researched leads at the customization step.</div>
+<div class="demo-banner">⚙️ FORMAT DEMO — leads &amp; dossiers below are placeholder data showing the depth/layout. The live run fills every field with real, cited research once you add your business profile.</div>
 
 <div class="wrap">
   <div class="tabs">
@@ -190,7 +279,6 @@
         <span class="chip" data-geo="international" onclick="setChip(this,'geo')">International</span>
       </div>
       <button class="btn" onclick="exportCSV()">⬇ Export CSV</button>
-      <button class="btn" onclick="window.print()">🖨 Print / PDF</button>
     </div>
     <div class="count" id="count"></div>
 
@@ -216,223 +304,403 @@
     <div class="digest-actions"><button class="btn primary" onclick="copyDigest()">📋 Copy digest as text</button></div>
     <div class="mailframe">
       <div class="mailhead">
-        <div class="subj">To: <span id="dTo">alracomanieves27@gmail.com</span> · Subject: 🎯 25 fresh leads for <span class="dBiz">[Your Business]</span> — <span id="dDate">30 May 2026</span></div>
+        <div class="subj">To: <span id="dTo">—</span> · Subject: 🎯 25 fresh leads — <span id="dDate">30 May 2026</span></div>
         <h2>Today's top 10 leads</h2>
       </div>
       <div class="mailbody">
-        <p>Morning — here are today's <b>25 fresh, non-repeating leads</b> (16 local · 6 interstate · 3 international). The 10 deep-dived best-fits are below; the full sortable set with all signals and sources lives in the attached dashboard.</p>
+        <p>Morning — here are today's <b>25 fresh, non-repeating leads</b> (16 local · 6 interstate · 3 international). The 10 deep-dived best-fits are below; open the dashboard for the full dossier and draft email on each.</p>
         <div id="digestCards"></div>
-        <p style="color:#64748b;font-size:13px">＋ 15 more qualified leads in the dashboard → sort by fit score, filter by tier or area, and copy any opening hook with one click.</p>
+        <p style="color:#64748b;font-size:13px">＋ 15 more qualified leads in the dashboard.</p>
       </div>
     </div>
   </div>
 </div>
 
+<!-- Quick panel -->
 <div class="overlay" id="overlay" onclick="closePanel()"></div>
 <aside class="panel" id="panel"></aside>
 
-<footer>Daily Lead Engine · single-file dashboard · runs offline, no backend · status changes saved to this browser</footer>
+<!-- Full dossier -->
+<div class="dossier" id="dossier"></div>
+
+<footer>Daily Lead Engine · single-file dashboard · runs offline · status &amp; sign-in saved to this browser only</footer>
 
 <script>
-/* ---------- SAMPLE DATA (placeholder — replaced on customization) ---------- */
-const LEADS = [
+/* ================= SAMPLE DATA (placeholder — replaced on customization) ================= */
+const LEADS=[
  {rank:1,name:"Sol & Salt Café",vertical:"Hospitality",location:"Cottesloe",region:"Perth, WA",geo:"local",size:"1 venue · ~15 staff",presence:2,tag:"great food, dormant IG",fit:89,tier:"A",deep:true,
-  why:"Beloved beachside café with stellar reviews but a dead Instagram — textbook high-leverage content play.",
-  signals:[{t:"4.8★ across 600+ Google reviews, yet last IG post was ~4 months ago",s:"https://maps.google.com/?q=Sol+%26+Salt+Cafe+Cottesloe"},{t:"Zero Reels/video while 3 nearby cafés post weekly and are growing fast",s:"https://instagram.com/explore/locations/cottesloe-cafes"},{t:"Named in a 'Best Perth brunch' roundup last month — momentum to ride",s:"https://www.perthnow.com.au/lifestyle/food"}],
+  founded:"Est. 2017",priceTier:"Mid-premium ($$)",
+  overview:"Beachside all-day café known for brunch and specialty coffee. Single high-traffic Cottesloe location, consistently busy on weekends. Strong product and loyal walk-in trade, but the brand barely exists online — a classic high-leverage content play.",
+  why:"Beloved beachside café with stellar reviews but a dead Instagram — textbook high-leverage content fit.",
+  web:{url:"solandsaltcafe.com.au",status:"Live · not mobile-optimised",note:"Single-page site, no booking, slow on mobile, last visibly updated 2022."},
+  socials:[{p:"Instagram",handle:"@solandsalt",followers:"4,200",activity:"Last post ~4 months ago",note:"Photo grid only, zero Reels, high follower-to-engagement drop-off."},{p:"TikTok",handle:"none",followers:"—",activity:"No account",note:"Whole channel untapped while competitors grow here."}],
+  gbp:{rating:"4.8",reviews:"610+",sentiment:"Overwhelmingly positive — coffee, breakfast and beach location praised; only gripe is weekend wait times."},
+  competitors:[{name:"The Shorehouse (Swanbourne)",edge:"Posts 3–4 Reels/week, ~30k followers, strong video brand."},{name:"Barchetta (Cottesloe)",edge:"Active IG with reels of plating + beach views, runs seasonal campaigns."}],
+  opportunities:[
+   {title:"World-class reviews, invisible feed",detail:"4.8★ from 600+ reviews but the IG has been dormant ~4 months — the audience demand is proven, the content engine just isn't running.",source:"Google Business Profile + Instagram (checked May 2026)"},
+   {title:"Zero short-form video in a video-first category",detail:"No Reels or TikTok at all while two direct competitors post weekly video and are visibly growing reach.",source:"Instagram / TikTok competitor scan"},
+   {title:"Photogenic venue + beach location = easy content",detail:"Beachfront setting and strong plating make this one of the cheapest venues to produce scroll-stopping content for.",source:"On-page photos, GBP image set"},
+   {title:"Press momentum to ride",detail:"Named in a 'Best Perth brunch' roundup last month — a timely reason to launch a content push now.",source:"PerthNow lifestyle (Apr 2026)"}],
+  ability:[{t:"Premium price point ($24 avg brunch) and consistent weekend queues signal healthy margins",source:"Menu + GBP popular-times"},{t:"Established 7+ years with a stable single-site operation",source:"Business registration / site"}],
+  timing:[{t:"Featured in a 'Best Perth brunch' list last month — momentum + reachable moment",source:"PerthNow (Apr 2026)"},{t:"Heading into winter menu change — natural content launch point",source:"Seasonal menu cadence"}],
+  dmIntel:"Owner not publicly named on site or socials. Best reachable channel is the public IG DM or the contact form. (No personal contact details gathered — public business channels only.)",
+  strategy:"Lead with a short 'taster' Reel shoot to prove the format, then convert to a monthly retainer. Frame the pitch around the gap between their 5-star reputation and silent feed — low risk, fast visible win. Realistic 90-day target: re-activate posting cadence + 3–5 Reels/week, rebuild reach ahead of summer.",
+  pkg:{name:"Content Retainer — Hospitality",scope:"2 shoot days/month + 12–16 edited Reels + posting & light community management",price:"$2,500–4,000 / mo"},
+  risks:["May believe word-of-mouth is 'enough' — needs the reputation/reach gap shown visually.","Single owner-operator; decisions can be slow during peak service."],
   service:"Reels production + social management retainer",pitch:"Turn your 5-star room into 5-star reach.",
-  hook:"Sol & Salt has some of the best brunch reviews in Cottesloe and one of the quietest Instagram feeds in the suburb — that exact gap is what we close. We'd love to send over 3 Reel concepts shot in your space, no strings.",
-  value:"$2–4k/mo retainer",dm:"unknown (owner not publicly listed)",channel:"IG DM @solandsalt",sources:["https://maps.google.com/?q=Sol+%26+Salt+Cafe","https://instagram.com/solandsalt"]},
+  hook:"Sol & Salt has some of the best brunch reviews in Cottesloe and one of the quietest Instagram feeds in the suburb — that exact gap is what we close.",
+  value:"$2–4k/mo retainer",dm:"unknown (owner not publicly listed)",channel:"IG DM @solandsalt",
+  sources:["https://maps.google.com/?q=Sol+%26+Salt+Cafe+Cottesloe","https://instagram.com/solandsalt","https://www.perthnow.com.au/lifestyle/food","https://solandsaltcafe.com.au"]},
 
  {rank:2,name:"Ironhaus Strength Co.",vertical:"Fitness",location:"Leederville",region:"Perth, WA",geo:"local",size:"1 box · ~8 coaches",presence:2,tag:"no Reels, rivals viral",fit:86,tier:"A",deep:true,
-  why:"Premium strength gym with a loyal member base but no video content while competitors rack up views.",
-  signals:[{t:"Competitor gyms in Mount Hawthorn posting member-transformation Reels hitting 20k+ views",s:"https://instagram.com/explore/tags/perthgym"},{t:"Active member community but feed is static photos only — no Reels at all",s:"https://instagram.com/ironhausstrength"},{t:"Currently advertising a class-pack promo (in Meta Ad Library) — budget is live",s:"https://www.facebook.com/ads/library"}],
+  founded:"Est. 2019",priceTier:"Premium ($$$)",
+  overview:"Premium strength & conditioning gym with an engaged member community and active class timetable. Currently advertising a class-pack promo, so marketing budget is live — but it produces no video while competitors win attention with member-transformation Reels.",
+  why:"Premium strength gym with a loyal base but no video content while competitors rack up views.",
+  web:{url:"ironhausstrength.com.au",status:"Live · decent",note:"Modern site with class booking; the weak link is content, not the website."},
+  socials:[{p:"Instagram",handle:"@ironhausstrength",followers:"3,100",activity:"Posts ~weekly, photos only",note:"No Reels at all; static posts under-perform in-feed."},{p:"Facebook",handle:"Ironhaus Strength Co.",followers:"1,400",activity:"Running paid ads",note:"Active ad spend = switchable/expandable budget."}],
+  gbp:{rating:"4.9",reviews:"180+",sentiment:"Coaching quality and community repeatedly praised; strong retention signals."},
+  competitors:[{name:"Movement Co (Mount Hawthorn)",edge:"Member-transformation Reels hitting 20k+ views."},{name:"The Yard (Osborne Park)",edge:"Daily class clips + coach POV content."}],
+  opportunities:[
+   {title:"Live ad budget, no organic video",detail:"Currently running Meta ads for a class pack but posts zero Reels — paid traffic lands on a thin organic presence, hurting conversion.",source:"Meta Ad Library + Instagram (May 2026)"},
+   {title:"Strong community that isn't on camera",detail:"4.9★ from members who love the place — exactly the testimonial/transformation content that converts new members, currently uncaptured.",source:"Google reviews"},
+   {title:"Competitors owning the local feed",detail:"Two nearby boxes post member-transformation Reels weekly and are visibly growing — Ironhaus is ceding the local attention war.",source:"Competitor IG scan"}],
+  ability:[{t:"Active Meta ad spend on a class-pack promo",source:"Meta Ad Library"},{t:"Premium membership pricing + strong retention",source:"GBP reviews / site pricing"}],
+  timing:[{t:"Mid-campaign on a class-pack promo right now — perfect moment to add video to the funnel",source:"Meta Ad Library (May 2026)"}],
+  dmIntel:"Head coach/owner appears in member posts but is not formally listed with a public role — treat as unknown. Reach via public IG DM.",
+  strategy:"Pitch video as the cheapest lift to their existing paid funnel. Start with one class shoot → a batch of transformation + class-energy Reels → retainer. Tie ROI to cost-per-signup on the live campaign.",
+  pkg:{name:"Content Retainer — Fitness",scope:"1 shoot day/month + 8–12 Reels (transformations, class energy, coach tips) + ad-creative cutdowns",price:"$1,500–3,000 / mo"},
+  risks:["May already work with a generalist marketer — position as the video specialist, not a replacement.","Member filming consent needs handling."],
   service:"Short-form video shoots (member stories + class energy)",pitch:"Make the energy in the room visible online.",
-  hook:"Ironhaus clearly has the community — what it doesn't have yet is the Reels showing it, which is exactly where gyms are winning new members right now. Could we shoot a quick test set at one of your busy classes?",
-  value:"$1.5–3k/mo retainer",dm:"unknown",channel:"IG DM @ironhausstrength",sources:["https://instagram.com/ironhausstrength","https://www.facebook.com/ads/library"]},
+  hook:"Ironhaus clearly has the community — what it doesn't have yet is the Reels showing it, which is exactly where gyms are winning members right now.",
+  value:"$1.5–3k/mo retainer",dm:"unknown",channel:"IG DM @ironhausstrength",
+  sources:["https://instagram.com/ironhausstrength","https://www.facebook.com/ads/library","https://maps.google.com/?q=Ironhaus+Strength+Leederville"]},
 
- {rank:3,name:"Marlowe & Sons Coffee",vertical:"Hospitality",location:"Surry Hills",region:"Sydney, NSW",geo:"interstate",size:"2 venues · ~25 staff",presence:2,tag:"strong brand, thin video",fit:85,tier:"A",deep:true,
-  why:"Multi-site specialty roaster with a strong brand but almost no short-form video to match its reputation.",
-  signals:[{t:"Two locations + a wholesale arm — established and clearly investable",s:"https://maps.google.com/?q=Marlowe+%26+Sons+Coffee+Surry+Hills"},{t:"Beautiful grid photography but only 2 Reels in 6 months",s:"https://instagram.com/marloweandsons"},{t:"Just announced a third site opening — perfect launch-content timing",s:"https://www.broadsheet.com.au/sydney"}],
+ {rank:3,name:"Marlowe & Sons Coffee",vertical:"Hospitality",location:"Surry Hills",region:"Sydney, NSW",geo:"interstate",size:"2 venues + wholesale",presence:2,tag:"strong brand, thin video",fit:85,tier:"A",deep:true,
+  founded:"Est. 2015",priceTier:"Premium ($$$)",
+  overview:"Multi-site specialty roaster with a polished brand, two cafés and a wholesale arm — and a third site reportedly on the way. Established and clearly investable; the gap is short-form video to match the brand's quality.",
+  why:"Multi-site roaster with a strong brand but almost no short-form video to match its reputation.",
+  web:{url:"marloweandsons.com.au",status:"Live · strong",note:"Polished e-com + wholesale site; brand assets are excellent."},
+  socials:[{p:"Instagram",handle:"@marloweandsons",followers:"11,800",activity:"~2 Reels in 6 months",note:"Beautiful grid, almost no video despite a large audience."},{p:"TikTok",handle:"sparse",followers:"under 500",activity:"Rarely posts",note:"Underused channel for a brand this size."}],
+  gbp:{rating:"4.7",reviews:"1,200+ (combined)",sentiment:"Coffee quality and fit-out consistently praised across both sites."},
+  competitors:[{name:"Single O (Surry Hills)",edge:"Heavy Reels + barista-education video, strong wholesale brand."},{name:"Mecca Coffee",edge:"Polished brand video and launch campaigns."}],
+  opportunities:[
+   {title:"Big audience, almost no video",detail:"~12k followers but only ~2 Reels in 6 months — a large warm audience being under-served by the format that now drives reach.",source:"Instagram (May 2026)"},
+   {title:"Third-site launch incoming",detail:"A new location is the ideal anchor for a run of launch Reels — countdown, build, opening day, behind-the-bar.",source:"Broadsheet Sydney mention (2026)"},
+   {title:"Wholesale story is untold on video",detail:"The roastery/wholesale arm is a rich, differentiated content vein (sourcing, roasting) that's currently invisible.",source:"Site + IG audit"}],
+  ability:[{t:"Two venues + wholesale = multi-revenue, established operation",source:"Company site"},{t:"Premium brand investment already evident in photography/fit-out",source:"Site + IG"}],
+  timing:[{t:"Third location reportedly opening soon — launch-content window is now",source:"Broadsheet Sydney (2026)"}],
+  dmIntel:"Founder is occasionally quoted in trade press but no public contact role listed — treat as unknown; approach via website contact form.",
+  strategy:"Lead with a launch-content package tied to the new site, then roll into an ongoing retainer covering all venues + the wholesale story. Anchor the pitch on protecting/extending the brand they've already invested in.",
+  pkg:{name:"Launch + Retainer — Multi-site",scope:"Launch content sprint (2k) + ongoing 2 shoot days/mo across venues + 16 Reels/mo",price:"$2k launch + $2,500–3,500 / mo"},
+  risks:["Likely has internal brand/marketing input — position as specialist video partner.","Multi-stakeholder = longer decision cycle."],
   service:"Launch content package + ongoing Reels retainer",pitch:"Give the new site the launch buzz it deserves.",
-  hook:"With a third Marlowe & Sons on the way, this is the ideal moment to build a run of launch Reels — the format driving the most new-café foot traffic right now. Happy to mock up a launch content plan for the opening.",
-  value:"$2k launch + $2–3k/mo",dm:"unknown",channel:"Business email via website contact form",sources:["https://instagram.com/marloweandsons","https://www.broadsheet.com.au/sydney"]},
+  hook:"With a third Marlowe & Sons on the way, this is the ideal moment to build a run of launch Reels — the format driving the most new-café foot traffic right now.",
+  value:"$2k launch + $2–3k/mo",dm:"unknown",channel:"Business email via website contact form",
+  sources:["https://instagram.com/marloweandsons","https://www.broadsheet.com.au/sydney","https://marloweandsons.com.au"]},
 
  {rank:4,name:"Lumière Skin Studio",vertical:"Beauty",location:"Subiaco",region:"Perth, WA",geo:"local",size:"1 clinic · ~6 staff",presence:3,tag:"decent site, no video",fit:84,tier:"A",deep:true,
-  why:"Premium skin clinic with a tidy website but no video — a category where treatment Reels convert hard.",
-  signals:[{t:"Premium positioning + treatment menu priced $150–600 — strong ability to pay",s:"https://maps.google.com/?q=Lumiere+Skin+Studio+Subiaco"},{t:"No before/after or treatment Reels, which dominate beauty discovery",s:"https://instagram.com/lumiereskin"},{t:"Hiring a part-time 'marketing & front desk' role — marketing intent",s:"https://au.indeed.com/"}],
+  founded:"Est. 2018",priceTier:"Premium ($$$)",
+  overview:"Premium skin clinic with a tidy website and a high-value treatment menu, currently hiring for a marketing-adjacent role. Strong ability to pay; no video in a category where treatment Reels convert hard.",
+  why:"Premium skin clinic with a tidy website but no video — a category where treatment Reels convert.",
+  web:{url:"lumiereskin.com.au",status:"Live · good",note:"Clean booking-enabled site; content is the gap, not the site."},
+  socials:[{p:"Instagram",handle:"@lumiereskin",followers:"5,600",activity:"Posts regularly, photos only",note:"No before/after or treatment Reels — the highest-converting beauty format is missing."}],
+  gbp:{rating:"4.8",reviews:"240+",sentiment:"Results and professionalism praised; loyal repeat clientele."},
+  competitors:[{name:"Skin Lab (Claremont)",edge:"Treatment-journey Reels + practitioner education content."},{name:"The Skin Bar",edge:"Before/after Reels driving bookings."}],
+  opportunities:[
+   {title:"No treatment video in a video-led category",detail:"Beauty discovery runs on before/after and treatment Reels — none present despite premium results.",source:"Instagram (May 2026)"},
+   {title:"Actively hiring marketing help",detail:"Listed a part-time 'marketing & front desk' role — clear intent and budget for marketing right now.",source:"Indeed listing (May 2026)"},
+   {title:"High-value menu = strong ROI on content",detail:"Treatments priced $150–600 mean each booking from content is high-value, making video easy to justify.",source:"On-site treatment menu"}],
+  ability:[{t:"Premium treatment pricing ($150–600)",source:"Site menu"},{t:"Hiring for a marketing-adjacent role",source:"Indeed"}],
+  timing:[{t:"Open marketing role suggests they're actively building this capability now",source:"Indeed (May 2026)"}],
+  dmIntel:"Clinic director sometimes named on 'about' pages; here not clearly public — treat as unknown, reach via IG DM or the hiring contact.",
+  strategy:"Pitch as the outsourced video arm of the role they're already hiring for. Start with a treatment-journey series; tie to booking uplift.",
+  pkg:{name:"Content Retainer — Beauty",scope:"1 shoot day/mo + 10 Reels (treatment journeys, before/after, education) + posting",price:"$2,000–3,500 / mo"},
+  risks:["New marketing hire could absorb the work in-house — position as specialist video, faster than hiring.","Patient consent for before/after content."],
   service:"Treatment-focused Reels + social management",pitch:"Show the results clients can't see in a photo.",
-  hook:"Skin clinics live and die on Reels showing the glow-up — and Lumière's feed doesn't have them yet despite the premium results you deliver. We'd love to film a couple of treatment journeys as a test.",
-  value:"$2–3.5k/mo retainer",dm:"unknown",channel:"IG DM @lumiereskin",sources:["https://instagram.com/lumiereskin","https://au.indeed.com/"]},
+  hook:"Skin clinics live and die on Reels showing the glow-up — and Lumière's feed doesn't have them yet despite the premium results you deliver.",
+  value:"$2–3.5k/mo retainer",dm:"unknown",channel:"IG DM @lumiereskin",
+  sources:["https://instagram.com/lumiereskin","https://au.indeed.com/","https://lumiereskin.com.au"]},
 
  {rank:5,name:"The Greenhouse Eatery",vertical:"Hospitality",location:"Mount Lawley",region:"Perth, WA",geo:"local",size:"1 venue · ~20 staff",presence:2,tag:"buzzy room, flat feed",fit:82,tier:"A",deep:true,
+  founded:"Est. 2016",priceTier:"Mid-premium ($$)",
+  overview:"Popular plant-forward eatery with a photogenic fit-out and strong reviews, but the online presence doesn't reflect the in-room buzz. Seasonal menu launches happen with no content plan around them.",
   why:"Popular plant-forward eatery with a great atmosphere that isn't translating online.",
-  signals:[{t:"Consistently busy with 4.7★ (450+ reviews) but inconsistent posting",s:"https://maps.google.com/?q=The+Greenhouse+Eatery+Mount+Lawley"},{t:"Visually rich venue (ideal for video) but mostly reposts customer photos",s:"https://instagram.com/greenhouseeatery"},{t:"Seasonal menu launches with no content plan around them",s:"https://www.theurbanlist.com/perth"}],
+  web:{url:"greenhouseeatery.com.au",status:"Live · dated",note:"Functional but visually behind the venue itself."},
+  socials:[{p:"Instagram",handle:"@greenhouseeatery",followers:"6,900",activity:"Mostly reposts customer photos",note:"Little original or video content; inconsistent cadence."}],
+  gbp:{rating:"4.7",reviews:"450+",sentiment:"Atmosphere, plant-based menu and coffee praised; busy weekends."},
+  competitors:[{name:"Sayers (Leederville)",edge:"Consistent original Reels + seasonal campaigns."},{name:"Henry on Eighth",edge:"Strong video of plating + venue."}],
+  opportunities:[
+   {title:"Photogenic venue, under-shot",detail:"One of the most film-ready rooms in Mount Lawley, yet the feed is mostly customer reposts — easy, high-quality content sitting on the table.",source:"GBP photos + IG (May 2026)"},
+   {title:"Seasonal launches with no campaign",detail:"Menu changes happen with no content built around them — repeatable, calendarable content moments going unused.",source:"Menu cadence + IG history"},
+   {title:"Reviews prove demand, feed doesn't capture it",detail:"4.7★ from 450+ reviews shows a crowd that would follow and share if given content worth sharing.",source:"Google reviews"}],
+  ability:[{t:"20-staff operation with strong weekend trade",source:"Site + GBP popular-times"},{t:"Mid-premium pricing with established 8-year run",source:"Menu / registration"}],
+  timing:[{t:"Seasonal menu change approaching — natural shoot anchor",source:"Seasonal cadence"}],
+  dmIntel:"Owner not publicly listed; reach via IG DM or venue contact form.",
+  strategy:"Anchor first engagement on the next seasonal menu launch as a defined deliverable, then convert to a monthly shoot retainer using the venue as a standing set.",
+  pkg:{name:"Content Retainer — Hospitality",scope:"Monthly shoot + 12 Reels + seasonal campaign support",price:"$2,000–3,000 / mo (or $2k one-off launch)"},
+  risks:["Relies on repost culture — needs to see original content's lift.","Kitchen access during service for filming."],
   service:"Monthly content shoot + Reels retainer",pitch:"Your venue is the set — let's use it.",
-  hook:"The Greenhouse is one of the most photogenic rooms in Mount Lawley, which makes the quiet feed a real missed opportunity — especially around your seasonal menu drops. Can we plan a shoot around the next one?",
-  value:"$2k shoot or $2–3k/mo",dm:"unknown",channel:"IG DM @greenhouseeatery",sources:["https://instagram.com/greenhouseeatery","https://www.theurbanlist.com/perth"]},
+  hook:"The Greenhouse is one of the most photogenic rooms in Mount Lawley, which makes the quiet feed a real missed opportunity — especially around your seasonal menu drops.",
+  value:"$2k shoot or $2–3k/mo",dm:"unknown",channel:"IG DM @greenhouseeatery",
+  sources:["https://instagram.com/greenhouseeatery","https://www.theurbanlist.com/perth","https://greenhouseeatery.com.au"]},
 
  {rank:6,name:"Forge Functional Fitness",vertical:"Fitness",location:"Richmond",region:"Melbourne, VIC",geo:"interstate",size:"1 box · ~10 coaches",presence:2,tag:"big community, no video",fit:81,tier:"A",deep:true,
+  founded:"Est. 2018",priceTier:"Mid ($$)",
+  overview:"High-energy functional gym with an engaged community, currently running paid challenge campaigns. Video is absent while Richmond competitors post daily — a clear funnel-efficiency gap.",
   why:"High-energy functional gym with an engaged community and a content gap rivals are exploiting.",
-  signals:[{t:"800+ Instagram followers but engagement is low and video is absent",s:"https://instagram.com/forgefunctional"},{t:"Running Meta ads for a 6-week challenge — active marketing budget",s:"https://www.facebook.com/ads/library"},{t:"Competitor boxes in Richmond posting daily Reels and growing",s:"https://instagram.com/explore/tags/melbournefitness"}],
+  web:{url:"forgefunctional.com.au",status:"Live · ok",note:"Booking-enabled; content the weak point."},
+  socials:[{p:"Instagram",handle:"@forgefunctional",followers:"2,400",activity:"Posts but low engagement, little video",note:"Engagement lags follower count — content quality gap."},{p:"Facebook",handle:"Forge Functional",followers:"running ads",activity:"Active challenge ads",note:"Paid budget present."}],
+  gbp:{rating:"4.8",reviews:"150+",sentiment:"Coaching and community culture praised."},
+  competitors:[{name:"Acero (Richmond)",edge:"Daily Reels, strong local reach."},{name:"CrossFit Richmond",edge:"Member-story video content."}],
+  opportunities:[
+   {title:"Paid challenge funnel, no video fuel",detail:"Running a 6-week challenge via ads but no organic video to warm and convert the audience.",source:"Meta Ad Library + IG (May 2026)"},
+   {title:"Engagement below follower count",detail:"~2.4k followers but weak engagement signals a content-quality gap video would fix.",source:"IG-visible signals"},
+   {title:"Competitors posting daily",detail:"Two Richmond boxes post daily Reels and out-reach Forge locally.",source:"Competitor scan"}],
+  ability:[{t:"Active Meta ad spend on challenges",source:"Meta Ad Library"},{t:"10-coach operation, established 6+ years",source:"Site"}],
+  timing:[{t:"Mid-challenge campaign — add video to the live funnel now",source:"Meta Ad Library (May 2026)"}],
+  dmIntel:"Owner appears in content but no formal public contact role — unknown; reach via IG DM.",
+  strategy:"Sell video as cost-per-signup reduction on the existing challenge ads. Test shoot → retainer.",
+  pkg:{name:"Content Retainer — Fitness",scope:"1 shoot day/mo + 8–12 Reels + ad cutdowns",price:"$1,500–3,000 / mo"},
+  risks:["Price-sensitive segment — lead with ROI framing.","Member filming consent."],
   service:"Reels retainer (challenge + community content)",pitch:"Fuel your challenge funnel with video.",
-  hook:"Forge is already paying to fill its challenges — adding Reels to that funnel is usually the cheapest lift in cost-per-signup we see. We'd love to shoot a test batch around your current 6-week challenge.",
-  value:"$1.5–3k/mo retainer",dm:"unknown",channel:"IG DM @forgefunctional",sources:["https://instagram.com/forgefunctional","https://www.facebook.com/ads/library"]},
+  hook:"Forge is already paying to fill its challenges — adding Reels to that funnel is usually the cheapest lift in cost-per-signup we see.",
+  value:"$1.5–3k/mo retainer",dm:"unknown",channel:"IG DM @forgefunctional",
+  sources:["https://instagram.com/forgefunctional","https://www.facebook.com/ads/library"]},
 
  {rank:7,name:"Ponsonby Road Kitchen",vertical:"Hospitality",location:"Ponsonby",region:"Auckland, NZ",geo:"international",size:"1 venue · ~22 staff",presence:2,tag:"top reviews, sleepy IG",fit:80,tier:"A",deep:true,
+  founded:"Est. 2014",priceTier:"Premium ($$$)",
+  overview:"Acclaimed Auckland restaurant with destination-level reviews and a premium fit-out, but a feed that posts roughly monthly with no video. A new weekend brunch service gives a launch reason.",
   why:"Acclaimed Auckland restaurant with excellent reviews and an underused social presence.",
-  signals:[{t:"4.6★ with 900+ reviews — strong product, weak digital storytelling",s:"https://maps.google.com/?q=Ponsonby+Road+Kitchen+Auckland"},{t:"Posts ~once a month, no Reels, despite a premium fit-out",s:"https://instagram.com/ponsonbyroadkitchen"},{t:"Recently added a weekend brunch service to promote",s:"https://www.metromag.co.nz/"}],
+  web:{url:"ponsonbyroadkitchen.co.nz",status:"Live · good",note:"Booking-enabled; brand solid, content thin."},
+  socials:[{p:"Instagram",handle:"@ponsonbyroadkitchen",followers:"8,100",activity:"~monthly posts, no Reels",note:"Large audience, minimal video."}],
+  gbp:{rating:"4.6",reviews:"900+",sentiment:"Food and service strongly praised; destination dining."},
+  competitors:[{name:"Williams Eatery",edge:"Active Reels + brunch content."},{name:"Amano",edge:"Strong video brand."}],
+  opportunities:[
+   {title:"Destination reviews, monthly-at-best feed",detail:"4.6★ from 900+ reviews but posting roughly monthly with no Reels — large warm audience under-served.",source:"GBP + IG (May 2026)"},
+   {title:"New brunch service to launch",detail:"Recently added weekend brunch — a defined, promotable content moment.",source:"Metro Auckland mention (2026)"},
+   {title:"Premium fit-out, no video",detail:"High-end room ideal for video; none being produced.",source:"On-page imagery"}],
+  ability:[{t:"22-staff premium venue, 10+ years established",source:"Site"},{t:"Destination pricing",source:"Menu"}],
+  timing:[{t:"New brunch service = launch window now",source:"Metro Auckland (2026)"}],
+  dmIntel:"Approach via website contact form; no public personal contact.",
+  strategy:"Remote-friendly model via a structured shot-list; launch the brunch service with a Reels burst, then retainer.",
+  pkg:{name:"Remote Content Retainer",scope:"Shot-list + remote edit, 8–10 Reels/mo (+ optional periodic on-site shoot)",price:"$2,000–3,000 / mo"},
+  risks:["Remote workflow needs a reliable on-site filmer — scope clearly.","Time-zone coordination."],
   service:"Remote-friendly Reels package (shot-list + edit)",pitch:"Launch the brunch service with video.",
-  hook:"Ponsonby Road Kitchen has the reviews of a destination restaurant and the feed of a quiet local — your new brunch service is the perfect reason to fix that. We work with venues remotely via a simple shot-list; happy to scope it.",
-  value:"$2–3k/mo (remote)",dm:"unknown",channel:"Business email via website",sources:["https://instagram.com/ponsonbyroadkitchen","https://www.metromag.co.nz/"]},
+  hook:"Ponsonby Road Kitchen has the reviews of a destination restaurant and the feed of a quiet local — your new brunch service is the perfect reason to fix that.",
+  value:"$2–3k/mo (remote)",dm:"unknown",channel:"Business email via website",
+  sources:["https://instagram.com/ponsonbyroadkitchen","https://www.metromag.co.nz/"]},
 
  {rank:8,name:"Vela Boutique",vertical:"Retail",location:"Claremont",region:"Perth, WA",geo:"local",size:"1 store · ~5 staff",presence:3,tag:"nice site, no Reels",fit:78,tier:"B",deep:true,
+  founded:"Est. 2020",priceTier:"Premium ($$$)",
+  overview:"Curated premium fashion boutique with strong flat-lay photography but no video to drive discovery. Premium stock implies customers with disposable income and good content ROI.",
   why:"Premium fashion boutique with good photography but no video to drive discovery.",
-  signals:[{t:"Curated, premium stock — customers with disposable income",s:"https://maps.google.com/?q=Vela+Boutique+Claremont"},{t:"Strong flat-lay photos but zero try-on/styling Reels",s:"https://instagram.com/velaboutique"}],
+  web:{url:"velaboutique.com.au",status:"Live · e-com",note:"Shopify-style store, well-photographed; no video."},
+  socials:[{p:"Instagram",handle:"@velaboutique",followers:"4,800",activity:"Photos only",note:"No styling/try-on Reels — the format driving boutique discovery."}],
+  gbp:{rating:"4.7",reviews:"60+",sentiment:"Service and curation praised."},
+  competitors:[{name:"Empire Rose",edge:"Styling Reels + new-arrival video."},{name:"Varga Girl",edge:"Strong try-on content."}],
+  opportunities:[
+   {title:"Premium stock, photo-only feed",detail:"Curated premium range but no try-on/styling Reels — the exact format driving boutique foot traffic.",source:"Instagram (May 2026)"},
+   {title:"E-com + store = video converts both",detail:"Has an online store; video lifts both in-store visits and online sales.",source:"Site"}],
+  ability:[{t:"Premium price point, disposable-income customer",source:"Site stock/pricing"},{t:"Both store and e-com revenue",source:"Site"}],
+  timing:[{t:"New-season stock arrivals = recurring content trigger",source:"Retail seasonality"}],
+  dmIntel:"Owner often the face of small boutiques but not formally public here — unknown; reach via IG DM.",
+  strategy:"Test with a 'new arrivals' styling set; convert to a monthly Reels retainer aligned to stock drops.",
+  pkg:{name:"Content Retainer — Retail",scope:"Monthly styling shoot + 8–10 Reels (try-on, new arrivals, styling tips)",price:"$1,500–2,500 / mo"},
+  risks:["Small team, limited filming time in-store.","Needs to see video → sales link."],
   service:"Styling & try-on Reels retainer",pitch:"Turn new arrivals into shoppable Reels.",
-  hook:"Boutiques like Vela are seeing styling Reels drive most of their new foot traffic — and yours is built on photos only. We'd love to film a 'new arrivals' set for you to test.",
-  value:"$1.5–2.5k/mo",dm:"unknown",channel:"IG DM @velaboutique",sources:["https://instagram.com/velaboutique"]},
+  hook:"Boutiques like Vela are seeing styling Reels drive most of their new foot traffic — and yours is built on photos only.",
+  value:"$1.5–2.5k/mo",dm:"unknown",channel:"IG DM @velaboutique",
+  sources:["https://instagram.com/velaboutique","https://velaboutique.com.au"]},
 
  {rank:9,name:"Coastline Pilates",vertical:"Fitness",location:"Scarborough",region:"Perth, WA",geo:"local",size:"1 studio · ~6 instructors",presence:2,tag:"growing, thin content",fit:76,tier:"B",deep:true,
+  founded:"Est. 2021",priceTier:"Premium ($$$)",
+  overview:"Reformer pilates studio riding strong category growth with a glowing (if small) review base, but under-producing the content that fuels that growth.",
   why:"Reformer pilates studio riding category growth but under-producing the content that fuels it.",
-  signals:[{t:"Reformer pilates booming locally; studio has a waitlist vibe but few posts",s:"https://instagram.com/coastlinepilates"},{t:"4.9★ small but glowing review base — strong word of mouth to amplify",s:"https://maps.google.com/?q=Coastline+Pilates+Scarborough"}],
+  web:{url:"coastlinepilates.com.au",status:"Live · ok",note:"Class-booking site; content sparse."},
+  socials:[{p:"Instagram",handle:"@coastlinepilates",followers:"2,900",activity:"Sporadic, little video",note:"Reformer content is a hot format; barely used here."}],
+  gbp:{rating:"4.9",reviews:"40+",sentiment:"Instructors and vibe strongly praised; clear word-of-mouth."},
+  competitors:[{name:"KX Pilates",edge:"Polished class Reels + brand video."},{name:"Sweat Studio",edge:"Strong instructor-led content."}],
+  opportunities:[
+   {title:"Hot category, quiet feed",detail:"Reformer pilates is booming on Reels; Coastline has the vibe but not the video.",source:"IG + category trend (May 2026)"},
+   {title:"Glowing reviews to amplify",detail:"4.9★ word-of-mouth is ideal testimonial/class-energy content, currently uncaptured.",source:"Google reviews"}],
+  ability:[{t:"Premium class pricing, growth-phase studio",source:"Site pricing"},{t:"Multiple instructors = scalable demand",source:"Site"}],
+  timing:[{t:"Category momentum + studio growth phase = invest-in-reach moment",source:"Trend + site"}],
+  dmIntel:"Owner-instructor likely; not formally public — unknown; reach via IG DM.",
+  strategy:"Capture one class day, show the polished Reels output, convert to retainer aligned to class promotion.",
+  pkg:{name:"Content Retainer — Fitness",scope:"Monthly class shoot + 8 Reels + posting",price:"$1,500–2,500 / mo"},
+  risks:["Small studio, budget-conscious — start lean.","Filming around class privacy."],
   service:"Class-energy Reels + social management",pitch:"Show the studio that's already buzzing.",
-  hook:"Reformer studios are one of the hottest categories on Reels right now, and Coastline has the vibe but not the video. Want us to capture a class and show you what it could look like?",
-  value:"$1.5–2.5k/mo",dm:"unknown",channel:"IG DM @coastlinepilates",sources:["https://instagram.com/coastlinepilates"]},
+  hook:"Reformer studios are one of the hottest categories on Reels right now, and Coastline has the vibe but not the video.",
+  value:"$1.5–2.5k/mo",dm:"unknown",channel:"IG DM @coastlinepilates",
+  sources:["https://instagram.com/coastlinepilates","https://coastlinepilates.com.au"]},
 
  {rank:10,name:"Lunar Beauty Collective",vertical:"Beauty",location:"Fortitude Valley",region:"Brisbane, QLD",geo:"interstate",size:"1 salon · ~9 staff",presence:3,tag:"trendy, no video plan",fit:74,tier:"B",deep:true,
-  why:"Trend-aware beauty salon with an audience but no consistent video output.",
-  signals:[{t:"Active IG with a young audience but sporadic, unedited video",s:"https://instagram.com/lunarbeautyco"},{t:"Premium service menu and a busy Valley location — solid ability to pay",s:"https://maps.google.com/?q=Lunar+Beauty+Collective+Fortitude+Valley"}],
+  founded:"Est. 2019",priceTier:"Premium ($$$)",
+  overview:"Trend-aware beauty salon in a busy precinct with a young audience and a premium menu. Already posts video — but it's unedited and unplanned, the gap between 'posting' and 'growing'.",
+  why:"Trend-aware beauty salon with an audience but no consistent, edited video output.",
+  web:{url:"lunarbeauty.com.au",status:"Live · ok",note:"Booking-enabled; content quality the gap."},
+  socials:[{p:"Instagram",handle:"@lunarbeautyco",followers:"7,300",activity:"Posts raw video sporadically",note:"Has raw clips but no editing/calendar — under-performs potential."},{p:"TikTok",handle:"@lunarbeautyco",followers:"1,900",activity:"Inconsistent",note:"Audience exists, output unplanned."}],
+  gbp:{rating:"4.6",reviews:"210+",sentiment:"Results and vibe praised; busy precinct location."},
+  competitors:[{name:"Edwards & Co",edge:"Polished, planned Reels at scale."},{name:"Halo Brisbane",edge:"Strong edited transformation content."}],
+  opportunities:[
+   {title:"Posts video, but raw and unplanned",detail:"Already filming but no editing or calendar — the cheapest upgrade is turning existing effort into polished, scheduled output.",source:"IG/TikTok (May 2026)"},
+   {title:"Young, engaged precinct audience",detail:"Valley location + young audience is ideal for trend-led beauty content.",source:"GBP + IG"}],
+  ability:[{t:"Premium service menu, 9-staff salon",source:"Site"},{t:"Busy Fortitude Valley location",source:"GBP"}],
+  timing:[{t:"Already investing effort in video — ready to be leveled up now",source:"IG history"}],
+  dmIntel:"Salon owner active on socials but no formal public contact role — unknown; reach via IG DM.",
+  strategy:"Take a week of their existing footage, return polished edits as proof, then sell an editing+calendar retainer (lower production lift, fast yes).",
+  pkg:{name:"Edit + Calendar Retainer",scope:"Edit their footage into 10–12 Reels/mo + content calendar + posting",price:"$1,500–2,500 / mo"},
+  risks:["May think they 'already do video' — lead with the polished-vs-raw comparison.","Consistency depends on their filming."],
   service:"Edited Reels retainer + content calendar",pitch:"Trade random clips for a real content engine.",
-  hook:"Lunar already posts video — it's just not edited or planned, which is exactly the gap between 'posting' and 'growing'. We'd love to take one week of footage and show you the polished version.",
-  value:"$1.5–2.5k/mo",dm:"unknown",channel:"IG DM @lunarbeautyco",sources:["https://instagram.com/lunarbeautyco"]},
+  hook:"Lunar already posts video — it's just not edited or planned, which is exactly the gap between 'posting' and 'growing'.",
+  value:"$1.5–2.5k/mo",dm:"unknown",channel:"IG DM @lunarbeautyco",
+  sources:["https://instagram.com/lunarbeautyco"]},
 
+ /* ---- Light-intel leads (11–25): full dossier generated in the live deep-dive run ---- */
  {rank:11,name:"Brasserie No. 8",vertical:"Hospitality",location:"Fremantle",region:"Perth, WA",geo:"local",size:"1 venue · ~18 staff",presence:3,tag:"established, static feed",fit:73,tier:"B",deep:false,
   why:"Established French brasserie with a loyal following and an underused feed.",
-  signals:[{t:"Long-running venue with strong reviews but photo-only posts",s:"https://maps.google.com/?q=Brasserie+No+8+Fremantle"},{t:"No content around its wine/events program",s:"https://instagram.com/brasserieno8"}],
+  signals:[{t:"Long-running venue, strong reviews, photo-only posts",s:"https://maps.google.com/?q=Brasserie+No+8+Fremantle"},{t:"No content around its wine/events program",s:"https://instagram.com/brasserieno8"}],
   service:"Reels retainer (food + events)",pitch:"Bring the brasserie's events online.",
-  hook:"Hi Brasserie No. 8 — we help established Fremantle venues turn a loyal room into online reach with short-form video. Given your events program has no content around it, there's an easy win here. Open to a few free concepts?",
+  hook:"Hi Brasserie No. 8 — we help established Fremantle venues turn a loyal room into online reach with short-form video.",
   value:"$1.5–2.5k/mo",dm:"unknown",channel:"IG DM @brasserieno8",sources:["https://instagram.com/brasserieno8"]},
 
  {rank:12,name:"Tiong Bahru Bakehouse",vertical:"Hospitality",location:"Tiong Bahru",region:"Singapore",geo:"international",size:"2 outlets · ~30 staff",presence:3,tag:"multi-site, light video",fit:72,tier:"B",deep:false,
   why:"Multi-outlet bakery with strong brand recognition and room for more video.",
-  signals:[{t:"Two outlets and steady queues — established and investable",s:"https://maps.google.com/?q=Tiong+Bahru+Bakehouse"},{t:"Posts product photos, very little short-form video",s:"https://instagram.com/tiongbahrubakehouse"}],
+  signals:[{t:"Two outlets and steady queues — established",s:"https://maps.google.com/?q=Tiong+Bahru+Bakehouse"},{t:"Product photos, very little short-form video",s:"https://instagram.com/tiongbahrubakehouse"}],
   service:"Remote Reels package",pitch:"Make the queues part of the story.",
-  hook:"Hi Tiong Bahru Bakehouse — we produce short-form video for multi-site food brands (remotely, via a simple shot-list). Your outlets clearly have the demand; we'd love to help turn that into Reels. Keen to see a couple of concepts?",
+  hook:"Hi Tiong Bahru Bakehouse — we produce short-form video for multi-site food brands remotely via a simple shot-list.",
   value:"$2–3k/mo (remote)",dm:"unknown",channel:"Business email via website",sources:["https://instagram.com/tiongbahrubakehouse"]},
 
  {rank:13,name:"Halo Hair Lounge",vertical:"Beauty",location:"Nedlands",region:"Perth, WA",geo:"local",size:"1 salon · ~7 staff",presence:2,tag:"good work, no Reels",fit:71,tier:"B",deep:false,
   why:"Skilled salon whose transformation work never makes it to video.",
-  signals:[{t:"Strong before/after photos but no Reels of the transformations",s:"https://instagram.com/halohairlounge"},{t:"4.8★ local reviews — reputation to build on",s:"https://maps.google.com/?q=Halo+Hair+Lounge+Nedlands"}],
+  signals:[{t:"Strong before/after photos, no transformation Reels",s:"https://instagram.com/halohairlounge"},{t:"4.8★ local reviews",s:"https://maps.google.com/?q=Halo+Hair+Lounge+Nedlands"}],
   service:"Transformation Reels retainer",pitch:"Put the glow-ups on video.",
-  hook:"Hi Halo Hair Lounge — salons get the most reach from transformation Reels, and yours are only in photos right now. We help Perth beauty brands fix exactly that. Want a couple of free concept edits?",
+  hook:"Hi Halo Hair Lounge — salons get the most reach from transformation Reels, and yours are only in photos right now.",
   value:"$1.5–2.5k/mo",dm:"unknown",channel:"IG DM @halohairlounge",sources:["https://instagram.com/halohairlounge"]},
 
  {rank:14,name:"Saltwater Swim Co.",vertical:"Retail",location:"Bondi",region:"Sydney, NSW",geo:"interstate",size:"1 store + online",presence:3,tag:"e-com, weak organic",fit:70,tier:"B",deep:false,
   why:"Swimwear retailer leaning on paid ads with thin organic video.",
-  signals:[{t:"Runs Meta ads (budget present) but little organic Reels content",s:"https://www.facebook.com/ads/library"},{t:"Strong product imagery, ideal for UGC-style video",s:"https://instagram.com/saltwaterswimco"}],
+  signals:[{t:"Runs Meta ads but little organic Reels content",s:"https://www.facebook.com/ads/library"},{t:"Strong product imagery, ideal for UGC",s:"https://instagram.com/saltwaterswimco"}],
   service:"UGC-style Reels retainer",pitch:"Lower CAC with organic video.",
-  hook:"Hi Saltwater Swim Co. — you're already spending on ads; adding organic UGC-style Reels usually drops blended acquisition cost fast. We'd love to send a few concept clips to test.",
+  hook:"Hi Saltwater Swim Co. — you're already spending on ads; adding organic UGC-style Reels usually drops blended acquisition cost fast.",
   value:"$2–3k/mo",dm:"unknown",channel:"IG DM @saltwaterswimco",sources:["https://instagram.com/saltwaterswimco","https://www.facebook.com/ads/library"]},
 
  {rank:15,name:"Drift Surf & Co.",vertical:"Retail",location:"Trigg",region:"Perth, WA",geo:"local",size:"1 store · ~5 staff",presence:3,tag:"lifestyle brand, no video",fit:69,tier:"B",deep:false,
   why:"Surf-lifestyle store with great brand fit for video and none of it yet.",
-  signals:[{t:"Lifestyle product range begging for in-context video",s:"https://instagram.com/driftsurfco"},{t:"Steady local following but flat engagement",s:"https://maps.google.com/?q=Drift+Surf+Co+Trigg"}],
+  signals:[{t:"Lifestyle range begging for in-context video",s:"https://instagram.com/driftsurfco"},{t:"Steady local following, flat engagement",s:"https://maps.google.com/?q=Drift+Surf+Co+Trigg"}],
   service:"Lifestyle Reels retainer",pitch:"Sell the lifestyle, not just the stock.",
-  hook:"Hi Drift Surf & Co. — surf-lifestyle brands are made for Reels and yours doesn't have any yet. We help Perth retailers turn product into lifestyle video. Want to see a couple of free concepts?",
+  hook:"Hi Drift Surf & Co. — surf-lifestyle brands are made for Reels and yours doesn't have any yet.",
   value:"$1.5–2.5k/mo",dm:"unknown",channel:"IG DM @driftsurfco",sources:["https://instagram.com/driftsurfco"]},
 
  {rank:16,name:"The Mill House",vertical:"Hospitality",location:"Fitzroy",region:"Melbourne, VIC",geo:"interstate",size:"1 venue · ~16 staff",presence:2,tag:"cult following, quiet feed",fit:65,tier:"B",deep:false,
   why:"Cult Fitzroy venue with word-of-mouth buzz that isn't online.",
-  signals:[{t:"Strong reviews and a regular crowd, minimal posting",s:"https://maps.google.com/?q=The+Mill+House+Fitzroy"},{t:"No Reels despite a very 'shareable' aesthetic",s:"https://instagram.com/themillhousefitzroy"}],
+  signals:[{t:"Strong reviews and a regular crowd, minimal posting",s:"https://maps.google.com/?q=The+Mill+House+Fitzroy"},{t:"No Reels despite a shareable aesthetic",s:"https://instagram.com/themillhousefitzroy"}],
   service:"Reels retainer",pitch:"Take the word-of-mouth online.",
-  hook:"Hi The Mill House — you've got the kind of word-of-mouth most Fitzroy venues want, but almost none of it lives online as video. That's our whole job. Open to a few free Reel concepts?",
+  hook:"Hi The Mill House — you've got the kind of word-of-mouth most Fitzroy venues want, but almost none of it lives online as video.",
   value:"$1.5–2.5k/mo",dm:"unknown",channel:"IG DM @themillhousefitzroy",sources:["https://instagram.com/themillhousefitzroy"]},
 
  {rank:17,name:"The Daily Grind",vertical:"Hospitality",location:"Victoria Park",region:"Perth, WA",geo:"local",size:"1 café · ~10 staff",presence:3,tag:"solid local, no plan",fit:64,tier:"B",deep:false,
   why:"Neighbourhood café with a steady crowd and no content plan.",
-  signals:[{t:"Reliable local trade, 4.6★, but inconsistent posting",s:"https://maps.google.com/?q=The+Daily+Grind+Victoria+Park"},{t:"No Reels; competitors on the strip post regularly",s:"https://instagram.com/thedailygrindvicpark"}],
+  signals:[{t:"Reliable local trade, 4.6★, inconsistent posting",s:"https://maps.google.com/?q=The+Daily+Grind+Victoria+Park"},{t:"No Reels; competitors on the strip post regularly",s:"https://instagram.com/thedailygrindvicpark"}],
   service:"Social management + monthly Reels",pitch:"Stay top-of-mind on the strip.",
-  hook:"Hi The Daily Grind — your café has a loyal crowd but the feed goes quiet for weeks, while others on the strip stay visible. We help Perth cafés stay top-of-mind with regular Reels. Want a sample plan?",
+  hook:"Hi The Daily Grind — your café has a loyal crowd but the feed goes quiet for weeks, while others on the strip stay visible.",
   value:"$1–2k/mo",dm:"unknown",channel:"IG DM @thedailygrindvicpark",sources:["https://instagram.com/thedailygrindvicpark"]},
 
  {rank:18,name:"Pulse Boxing Club",vertical:"Fitness",location:"Osborne Park",region:"Perth, WA",geo:"local",size:"1 gym · ~6 coaches",presence:2,tag:"high energy, no video",fit:62,tier:"B",deep:false,
   why:"High-energy boxing gym whose best asset (the room) is invisible online.",
-  signals:[{t:"Energetic classes that would shine on video; currently photo-only",s:"https://instagram.com/pulseboxingclub"},{t:"Growing membership but low online visibility",s:"https://maps.google.com/?q=Pulse+Boxing+Club+Osborne+Park"}],
+  signals:[{t:"Energetic classes ideal for video; currently photo-only",s:"https://instagram.com/pulseboxingclub"},{t:"Growing membership, low online visibility",s:"https://maps.google.com/?q=Pulse+Boxing+Club+Osborne+Park"}],
   service:"Class-energy Reels retainer",pitch:"Bottle the energy of a class.",
-  hook:"Hi Pulse Boxing Club — boxing classes are some of the best Reels content out there, and yours aren't being filmed. We help Perth gyms turn that energy into reach. Want a free test shoot?",
+  hook:"Hi Pulse Boxing Club — boxing classes are some of the best Reels content out there, and yours aren't being filmed.",
   value:"$1.5–2.5k/mo",dm:"unknown",channel:"IG DM @pulseboxingclub",sources:["https://instagram.com/pulseboxingclub"]},
 
  {rank:19,name:"Botanica Day Spa",vertical:"Beauty",location:"Applecross",region:"Perth, WA",geo:"local",size:"1 spa · ~8 staff",presence:3,tag:"premium, dated content",fit:58,tier:"C",deep:false,
   why:"Premium spa with budget but dated, low-frequency content.",
-  signals:[{t:"Premium pricing signals ability to pay; content feels dated",s:"https://maps.google.com/?q=Botanica+Day+Spa+Applecross"},{t:"Few Reels; relies on static promos",s:"https://instagram.com/botanicadayspa"}],
+  signals:[{t:"Premium pricing signals ability to pay; content dated",s:"https://maps.google.com/?q=Botanica+Day+Spa+Applecross"},{t:"Few Reels; relies on static promos",s:"https://instagram.com/botanicadayspa"}],
   service:"Ambience Reels + social refresh",pitch:"Modernise a premium feed.",
-  hook:"Hi Botanica Day Spa — your pricing is premium but the feed feels a step behind it. We help spas refresh into calm, modern Reels that match the in-room experience. Open to a quick concept?",
+  hook:"Hi Botanica Day Spa — your pricing is premium but the feed feels a step behind it.",
   value:"$1.5–2.5k/mo",dm:"unknown",channel:"IG DM @botanicadayspa",sources:["https://instagram.com/botanicadayspa"]},
 
  {rank:20,name:"Atlas Barbershop",vertical:"Beauty",location:"Adelaide CBD",region:"Adelaide, SA",geo:"interstate",size:"1 shop · ~5 barbers",presence:3,tag:"good cuts, no Reels",fit:55,tier:"C",deep:false,
   why:"Solid barbershop whose cut content would perform but isn't being made.",
-  signals:[{t:"Barber transformation Reels reliably perform; none here yet",s:"https://instagram.com/atlasbarberadl"},{t:"Steady bookings but limited online reach",s:"https://maps.google.com/?q=Atlas+Barbershop+Adelaide"}],
+  signals:[{t:"Barber transformation Reels reliably perform; none here",s:"https://instagram.com/atlasbarberadl"},{t:"Steady bookings, limited online reach",s:"https://maps.google.com/?q=Atlas+Barbershop+Adelaide"}],
   service:"Cut-transformation Reels retainer",pitch:"Put the fresh cuts on Reels.",
-  hook:"Hi Atlas Barbershop — fresh-cut Reels are one of the most reliable formats in grooming, and yours aren't being filmed. We help barbershops fix that. Want a couple of free concept edits?",
+  hook:"Hi Atlas Barbershop — fresh-cut Reels are one of the most reliable formats in grooming, and yours aren't being filmed.",
   value:"$1–2k/mo",dm:"unknown",channel:"IG DM @atlasbarberadl",sources:["https://instagram.com/atlasbarberadl"]},
 
  {rank:21,name:"Stonewood Pizzeria",vertical:"Hospitality",location:"Inglewood",region:"Perth, WA",geo:"local",size:"1 venue · ~12 staff",presence:2,tag:"tasty, invisible online",fit:54,tier:"C",deep:false,
   why:"Well-reviewed pizzeria with almost no digital presence.",
-  signals:[{t:"4.5★ but very low posting frequency",s:"https://maps.google.com/?q=Stonewood+Pizzeria+Inglewood"},{t:"No Reels of the wood-fired process (proven format)",s:"https://instagram.com/stonewoodpizzeria"}],
+  signals:[{t:"4.5★ but very low posting frequency",s:"https://maps.google.com/?q=Stonewood+Pizzeria+Inglewood"},{t:"No Reels of the wood-fired process",s:"https://instagram.com/stonewoodpizzeria"}],
   service:"Process Reels + social setup",pitch:"Film the wood-fired theatre.",
-  hook:"Hi Stonewood Pizzeria — wood-fired 'process' Reels are some of the most-shared food content going, and yours isn't being filmed. We help Perth venues fix that. Want a quick sample concept?",
+  hook:"Hi Stonewood Pizzeria — wood-fired 'process' Reels are some of the most-shared food content going, and yours isn't being filmed.",
   value:"$1–2k/mo",dm:"unknown",channel:"IG DM @stonewoodpizzeria",sources:["https://instagram.com/stonewoodpizzeria"]},
 
  {rank:22,name:"Velvet Nail Bar",vertical:"Beauty",location:"Joondalup",region:"Perth, WA",geo:"local",size:"1 salon · ~6 staff",presence:3,tag:"busy, no video plan",fit:51,tier:"C",deep:false,
   why:"Busy nail bar with content potential but no plan.",
-  signals:[{t:"Nail-art Reels are a proven format; output here is sporadic",s:"https://instagram.com/velvetnailbar"},{t:"Steady bookings, limited reach beyond regulars",s:"https://maps.google.com/?q=Velvet+Nail+Bar+Joondalup"}],
+  signals:[{t:"Nail-art Reels are a proven format; output sporadic",s:"https://instagram.com/velvetnailbar"},{t:"Steady bookings, limited reach beyond regulars",s:"https://maps.google.com/?q=Velvet+Nail+Bar+Joondalup"}],
   service:"Nail-art Reels retainer",pitch:"Turn nail art into a feed.",
-  hook:"Hi Velvet Nail Bar — nail-art Reels travel far when they're done consistently, and yours are hit-and-miss. We help salons build a steady content engine. Open to a couple of free concepts?",
+  hook:"Hi Velvet Nail Bar — nail-art Reels travel far when they're done consistently, and yours are hit-and-miss.",
   value:"$1–2k/mo",dm:"unknown",channel:"IG DM @velvetnailbar",sources:["https://instagram.com/velvetnailbar"]},
 
  {rank:23,name:"Canggu Surf Shack",vertical:"Retail",location:"Canggu",region:"Bali, Indonesia",geo:"international",size:"1 store · ~6 staff",presence:3,tag:"great location, light video",fit:49,tier:"C",deep:false,
   why:"Tourist-area surf store with great backdrops and underused video.",
-  signals:[{t:"Prime tourist location with strong walk-in; thin Reels output",s:"https://instagram.com/canggusurfshack"},{t:"Photogenic setting ideal for lifestyle video",s:"https://maps.google.com/?q=Canggu+Surf+Shack+Bali"}],
+  signals:[{t:"Prime tourist location, thin Reels output",s:"https://instagram.com/canggusurfshack"},{t:"Photogenic setting ideal for lifestyle video",s:"https://maps.google.com/?q=Canggu+Surf+Shack+Bali"}],
   service:"Remote lifestyle Reels package",pitch:"Use the backdrop you already have.",
-  hook:"Hi Canggu Surf Shack — your location is a ready-made film set and the Reels aren't using it. We work with stores remotely via a shot-list. Keen to see a couple of concepts?",
+  hook:"Hi Canggu Surf Shack — your location is a ready-made film set and the Reels aren't using it.",
   value:"$1.5–2.5k/mo (remote)",dm:"unknown",channel:"IG DM @canggusurfshack",sources:["https://instagram.com/canggusurfshack"]},
 
  {rank:24,name:"Maison Florals",vertical:"Retail",location:"Wembley",region:"Perth, WA",geo:"local",size:"1 store · ~4 staff",presence:2,tag:"beautiful work, no video",fit:48,tier:"C",deep:false,
   why:"Florist with highly visual work that isn't being filmed.",
   signals:[{t:"Floral 'process' Reels perform well; none here",s:"https://instagram.com/maisonflorals"},{t:"Small but loyal customer base",s:"https://maps.google.com/?q=Maison+Florals+Wembley"}],
   service:"Process Reels retainer",pitch:"Film the arrangements coming together.",
-  hook:"Hi Maison Florals — floral process Reels are quietly one of the best-performing niches on Instagram, and yours aren't being captured. We help florists fix that. Want a free concept?",
+  hook:"Hi Maison Florals — floral process Reels are quietly one of the best-performing niches on Instagram, and yours aren't being captured.",
   value:"$1–2k/mo",dm:"unknown",channel:"IG DM @maisonflorals",sources:["https://instagram.com/maisonflorals"]},
 
  {rank:25,name:"Ridgeline Cycles",vertical:"Retail",location:"Myaree",region:"Perth, WA",geo:"local",size:"1 store · ~5 staff",presence:2,tag:"niche, minimal social",fit:47,tier:"C",deep:false,
   why:"Specialty bike shop with a niche audience and minimal social.",
-  signals:[{t:"Knowledgeable staff = strong 'explainer' video potential, unused",s:"https://instagram.com/ridgelinecycles"},{t:"Loyal niche base but low online visibility",s:"https://maps.google.com/?q=Ridgeline+Cycles+Myaree"}],
+  signals:[{t:"Expert staff = strong explainer-video potential, unused",s:"https://instagram.com/ridgelinecycles"},{t:"Loyal niche base, low online visibility",s:"https://maps.google.com/?q=Ridgeline+Cycles+Myaree"}],
   service:"Explainer + product Reels retainer",pitch:"Turn expertise into content.",
-  hook:"Hi Ridgeline Cycles — your team's expertise is perfect for short explainer Reels, which build trust and reach in niche retail. None of it's being filmed yet. Want a couple of free concepts?",
+  hook:"Hi Ridgeline Cycles — your team's expertise is perfect for short explainer Reels, which build trust and reach in niche retail.",
   value:"$1–2k/mo",dm:"unknown",channel:"IG DM @ridgelinecycles",sources:["https://instagram.com/ridgelinecycles"]}
 ];
 
-/* ---------- State ---------- */
+/* ================= Login ================= */
+const LOGIN_KEY="leadEngineLogin_v1";
+let login=JSON.parse(localStorage.getItem(LOGIN_KEY)||"null");
+function doLogin(){
+  const email=document.getElementById("gEmail").value.trim();
+  const biz=document.getElementById("gBiz").value.trim();
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){document.getElementById("gErr").style.display="block";return;}
+  login={email,biz};localStorage.setItem(LOGIN_KEY,JSON.stringify(login));applyLogin();
+}
+function doLogout(){localStorage.removeItem(LOGIN_KEY);login=null;document.getElementById("gate").classList.remove("hide");}
+function applyLogin(){
+  if(!login){document.getElementById("gate").classList.remove("hide");return;}
+  document.getElementById("gate").classList.add("hide");
+  document.getElementById("acctEmail").textContent=login.email;
+  document.getElementById("dTo").textContent=login.email;
+  document.getElementById("bizName").textContent=(login.biz||"[Your Business]")+" — Daily Lead Engine";
+}
+
+/* ================= State ================= */
 let state={tier:"all",geo:"all",sortKey:"rank",sortDir:1};
 const STATUS_KEY="leadEngineStatus_v1";
 let statusMap=JSON.parse(localStorage.getItem(STATUS_KEY)||"{}");
-const presenceOrder={}; // for sorting presence numerically handled directly
-
 function saveStatus(){localStorage.setItem(STATUS_KEY,JSON.stringify(statusMap));}
-function statusOf(l){return statusMap[l.name]||l.status||"New";}
+function statusOf(l){return statusMap[l.name]||"New";}
+const STATUSES=["New","Contacted","Replied","Meeting","Won","Lost"];
 
-/* ---------- Summary ---------- */
+/* ================= Summary ================= */
 function buildSummary(){
-  const a=LEADS.filter(l=>l.tier==="A").length, b=LEADS.filter(l=>l.tier==="B").length, c=LEADS.filter(l=>l.tier==="C").length;
-  cntA.textContent=a; cntB.textContent=b; cntC.textContent=c;
+  cntA.textContent=LEADS.filter(l=>l.tier==="A").length;
+  cntB.textContent=LEADS.filter(l=>l.tier==="B").length;
+  cntC.textContent=LEADS.filter(l=>l.tier==="C").length;
   const top=[...LEADS].sort((x,y)=>y.fit-x.fit)[0];
   topName.textContent=top.name+" · "+top.fit+"/100";
   topWhy.textContent=top.why;
-  const five=[...LEADS].sort((x,y)=>y.fit-x.fit).slice(0,5);
-  top5.innerHTML=five.map(l=>`<li><b>${l.name}</b> <span style="color:#64748b">— ${l.location} · ${l.fit}</span></li>`).join("");
+  top5.innerHTML=[...LEADS].sort((x,y)=>y.fit-x.fit).slice(0,5).map(l=>`<li><b>${l.name}</b> <span style="color:#64748b">— ${l.location} · ${l.fit}</span></li>`).join("");
 }
 
-/* ---------- Filter + sort ---------- */
+/* ================= Table ================= */
 function current(){
   const q=search.value.trim().toLowerCase();
   let rows=LEADS.filter(l=>{
@@ -443,16 +711,12 @@ function current(){
   });
   const k=state.sortKey;
   rows.sort((x,y)=>{
-    let xv=x[k], yv=y[k];
-    if(k==="status"){xv=statusOf(x);yv=statusOf(y);}
-    if(typeof xv==="string"){return xv.localeCompare(yv)*state.sortDir;}
+    let xv=k==="status"?statusOf(x):x[k], yv=k==="status"?statusOf(y):y[k];
+    if(typeof xv==="string")return xv.localeCompare(yv)*state.sortDir;
     return (xv-yv)*state.sortDir;
   });
   return rows;
 }
-
-const STATUSES=["New","Contacted","Replied","Meeting","Won","Lost"];
-
 function render(){
   const rows=current();
   count.textContent=`Showing ${rows.length} of ${LEADS.length} leads`;
@@ -463,80 +727,201 @@ function render(){
       <td>${l.vertical}</td>
       <td>${l.location} <span class="badge g-${l.geo}">${l.geo}</span></td>
       <td>${l.size}</td>
-      <td><span class="presence">${l.presence}/5</span> <span class="bsub">${l.tag}</span></td>
+      <td><b>${l.presence}/5</b> <span class="bsub">${l.tag}</span></td>
       <td><span class="fit">${l.fit}</span></td>
       <td><span class="badge t-${l.tier}">${l.tier}</span></td>
       <td><span class="stat">${statusOf(l)}</span></td>
     </tr>`).join("");
 }
+function sortBy(k){if(state.sortKey===k)state.sortDir*=-1;else{state.sortKey=k;state.sortDir=1;}render();}
+function setChip(el,group){el.parentElement.querySelectorAll(".chip").forEach(c=>c.classList.remove("on"));el.classList.add("on");state[group]=group==="tier"?el.dataset.tier:el.dataset.geo;render();}
 
-function sortBy(k){ if(state.sortKey===k)state.sortDir*=-1; else{state.sortKey=k;state.sortDir=1;} render(); }
-function setChip(el,group){
-  el.parentElement.querySelectorAll(".chip").forEach(c=>c.classList.remove("on"));
-  el.classList.add("on");
-  state[group]= group==="tier"? el.dataset.tier : el.dataset.geo;
-  render();
-}
-
-/* ---------- Detail panel ---------- */
+/* ================= Quick panel ================= */
 function openPanel(rank){
   const l=LEADS.find(x=>x.rank===rank);
-  const sigs=l.signals.map(s=>`<div class="sig"><span class="dot">▸</span><div>${s.t}<br><a href="${s.s}" target="_blank" rel="noopener">source ↗</a></div></div>`).join("");
-  const srcs=l.sources.map(s=>`<a href="${s}" target="_blank" rel="noopener">${s}</a>`).join("");
-  const opts=STATUSES.map(s=>`<option ${statusOf(l)===s?"selected":""}>${s}</option>`).join("");
   panel.innerHTML=`
     <div class="phead">
       <button class="pclose" onclick="closePanel()">✕</button>
-      <div class="pfit"><div class="n">${l.fit}</div><div class="l">fit / 100</div></div>
-      <div class="pbadges">
-        <span class="badge t-${l.tier}">Tier ${l.tier}</span>
-        <span class="badge g-${l.geo}">${l.geo}</span>
-        ${l.deep?'<span class="dd" style="margin:0">DEEP-DIVE</span>':''}
-      </div>
+      <div class="pbadges"><span class="badge t-${l.tier}">Tier ${l.tier}</span><span class="badge g-${l.geo}">${l.geo}</span>${l.deep?'<span class="dd" style="margin:0">DEEP-DIVE</span>':''}</div>
       <h2 class="pname">#${l.rank} ${l.name}</h2>
-      <div class="pmeta"><span>${l.vertical}</span>·<span>${l.location}, ${l.region}</span>·<span>${l.size}</span>·<span>Presence ${l.presence}/5 — ${l.tag}</span></div>
+      <div class="pmeta">${l.vertical} · ${l.location}, ${l.region} · Fit ${l.fit}/100</div>
     </div>
     <div class="pbody">
+      <button class="btn primary openbtn" onclick="openDossier(${l.rank})">📄 Open full dossier${l.deep?'':' (light)'} →</button>
       <div class="sec"><h3>Why they fit</h3><p>${l.why}</p></div>
-      <div class="sec"><h3>Top signals</h3>${sigs}</div>
       <div class="sec"><h3>Recommended service</h3><p>${l.service}</p></div>
-      <div class="sec"><h3>Pitch angle</h3><p>${l.pitch}</p></div>
-      <div class="sec"><h3>Opening hook</h3>
-        <div class="hookbox"><p id="hookText">"${l.hook}"</p><button class="copy" onclick="copyHook()">📋 Copy hook</button></div>
-      </div>
-      <div class="sec"><h3>Details</h3>
-        <div class="kv">
-          <span class="k">Est. deal value</span><span>${l.value}</span>
-          <span class="k">Decision-maker</span><span>${l.dm}</span>
-          <span class="k">Best channel</span><span>${l.channel}</span>
-        </div>
-      </div>
-      <div class="sec"><h3>Sources</h3><div class="srclist">${srcs}</div></div>
-      <div class="sec"><h3>Status</h3>
-        <select class="statussel" onchange="setStatus('${l.name.replace(/'/g,"\\'")}',this.value)">${opts}</select>
-      </div>
+      <div class="sec"><h3>Opening hook</h3><p style="font-style:italic;color:#312e81">"${l.hook}"</p></div>
+      <div class="sec"><h3>At a glance</h3><p>Deal value: <b>${l.value}</b><br>Channel: ${l.channel}<br>Decision-maker: ${l.dm}</p></div>
     </div>`;
-  overlay.classList.add("on"); panel.classList.add("on");
+  overlay.classList.add("on");panel.classList.add("on");
 }
 function closePanel(){overlay.classList.remove("on");panel.classList.remove("on");}
 function setStatus(name,val){statusMap[name]=val;saveStatus();render();}
-function copyHook(){const t=document.getElementById("hookText").textContent;navigator.clipboard.writeText(t.replace(/^"|"$/g,""));event.target.textContent="✓ Copied";setTimeout(()=>event.target.textContent="📋 Copy hook",1500);}
 
-/* ---------- CSV export ---------- */
+/* ================= Dossier ================= */
+let dossierRank=null, egTone="warm", egLength="standard";
+function openDossier(rank){
+  dossierRank=rank;const l=LEADS.find(x=>x.rank===rank);
+  const d=document.getElementById("dossier");
+  const opts=STATUSES.map(s=>`<option ${statusOf(l)===s?"selected":""}>${s}</option>`).join("");
+
+  const deepBlocks = l.deep ? `
+    ${section("🏢","Business overview",`<p>${l.overview}</p><div class="kv2" style="margin-top:8px"><span class="k">Founded</span><span>${l.founded}</span><span class="k">Price tier</span><span>${l.priceTier}</span></div>`)}
+    ${auditSection(l)}
+    ${section("⭐","Reputation & reviews",`<p><b>Google:</b> ${l.gbp.rating}★ from ${l.gbp.reviews} reviews.</p><p>${l.gbp.sentiment}</p>`)}
+    ${section("🥊","Competitive context", l.competitors.map(c=>`<p><b>${c.name}:</b> ${c.edge}</p>`).join(""))}
+    ${section("🎯","Opportunity analysis", l.opportunities.map((o,i)=>`<div class="opp"><div class="ot">${i+1}. ${o.title}</div><div class="od">${o.detail}</div><div class="src-tag">▸ ${o.source}</div></div>`).join(""))}
+    ${section("💰","Ability to pay",`<ul class="bullets">${l.ability.map(a=>`<li>${a.t} <span class="src-tag">(${a.source})</span></li>`).join("")}</ul>`)}
+    ${section("⏱","Timing — why now",`<ul class="bullets">${l.timing.map(t=>`<li>${t.t} <span class="src-tag">(${t.source})</span></li>`).join("")}</ul>`)}
+    ${section("👤","Decision-maker intel",`<p>${l.dmIntel}</p>`)}
+    ${section("🧭","Recommended strategy",`<p>${l.strategy}</p>`)}
+    ${section("📦","Suggested package & pricing",`<div class="pkg"><div class="pn">${l.pkg.name}</div><div class="pp">${l.pkg.price}</div><div>${l.pkg.scope}</div></div>`)}
+    ${section("⚠️","Risks & watch-outs",`<div class="risk"><ul class="bullets" style="margin:0">${l.risks.map(r=>`<li>${r}</li>`).join("")}</ul></div>`)}
+  ` : `
+    ${section("🏢","Overview",`<p>${l.why}</p>`)}
+    ${section("🎯","Key signals",`<ul class="bullets">${l.signals.map(s=>`<li>${s.t} <a href="${s.s}" target="_blank" rel="noopener">source ↗</a></li>`).join("")}</ul>`)}
+    ${section("🧭","Recommended approach",`<p><b>Lead with:</b> ${l.service}<br><b>Angle:</b> ${l.pitch}</p>`)}
+    <div class="lightnote">📋 <b>Light intel.</b> This lead was qualified but not deep-dived this run. In the live run, the top leads get the full treatment shown on the A-tier leads — presence audit, competitor analysis, ranked opportunities, ability/timing signals and decision-maker intel, all with real citations.</div>
+  `;
+
+  d.innerHTML=`
+    <div class="dtop">
+      <div><div class="dt-name">#${l.rank} ${l.name}</div><div class="dt-sub">${l.vertical} · ${l.location}, ${l.region} · ${l.deep?'Full deep-dive dossier':'Light intel'}</div></div>
+      <div class="dt-actions">
+        <button class="btn" onclick="window.print()">🖨 Print / Save PDF</button>
+        <button class="btn" onclick="closeDossier()">✕ Close</button>
+      </div>
+    </div>
+    <div class="dwrap">
+      <div class="dhero">
+        <div class="row1">
+          <div>
+            <h2>${l.name}</h2>
+            <div class="tags"><span class="badge t-${l.tier}">Tier ${l.tier}</span><span class="badge g-${l.geo}">${l.geo}</span>${l.deep?'<span class="dd" style="margin:0">DEEP-DIVE</span>':''}</div>
+          </div>
+          <div class="scorebox"><div class="n">${l.fit}</div><div class="l">Fit / 100</div></div>
+        </div>
+        <p class="lead-quote" style="margin-top:14px">${l.why}</p>
+        <div class="quickfacts">
+          <div class="qf"><div class="k">Vertical</div><div class="v">${l.vertical}</div></div>
+          <div class="qf"><div class="k">Location</div><div class="v">${l.location}, ${l.region}</div></div>
+          <div class="qf"><div class="k">Size</div><div class="v">${l.size}</div></div>
+          <div class="qf"><div class="k">Est. deal value</div><div class="v">${l.value}</div></div>
+          <div class="qf"><div class="k">Best channel</div><div class="v">${l.channel}</div></div>
+          <div class="qf"><div class="k">Decision-maker</div><div class="v">${l.dm}</div></div>
+        </div>
+      </div>
+
+      ${deepBlocks}
+
+      ${section("✉️","Draft outreach email", emailGenHTML(l))}
+
+      ${section("🔗","Sources",`<div class="srclist">${(l.sources||[]).map(s=>`<a href="${s}" target="_blank" rel="noopener">${s}</a>`).join("")||"—"}</div><p style="font-size:11.5px;color:#94a3b8;margin-top:8px">All signals cite public sources, recency-noted. Demo links are illustrative; live runs use real, dated sources.</p>`)}
+
+      ${section("📌","Status",`<select class="statussel" onchange="setStatus('${l.name.replace(/'/g,"\\'")}',this.value)">${opts}</select>`)}
+    </div>`;
+  d.classList.add("on");d.scrollTop=0;document.body.style.overflow="hidden";
+  renderEmail();
+}
+function closeDossier(){document.getElementById("dossier").classList.remove("on");document.body.style.overflow="";}
+function section(ic,title,inner){return `<div class="dsec"><h3><span class="ic">${ic}</span>${title}</h3>${inner}</div>`;}
+function auditSection(l){
+  const pct=l.presence*20;
+  const socials=l.socials.map(s=>`<div class="audit"><div class="ah"><span>${s.p} ${s.handle!=="none"?s.handle:""}</span><span style="color:#64748b;font-weight:600">${s.followers!=="—"?s.followers:""}</span></div><div class="det"><b>${s.activity}.</b> ${s.note}</div></div>`).join("");
+  return `<div class="dsec"><h3><span class="ic">📱</span>Digital presence audit</h3>
+    <div class="audit" style="margin-bottom:12px"><div class="ah"><span>Overall presence score</span><span>${l.presence}/5 — ${l.tag}</span></div><div class="meter"><span style="width:${pct}%"></span></div></div>
+    <div class="grid2">
+      <div class="audit"><div class="ah"><span>🌐 Website</span></div><div class="det"><b>${l.web.url}</b> — ${l.web.status}.<br>${l.web.note}</div></div>
+      ${socials}
+    </div></div>`;
+}
+
+/* ================= Email generator ================= */
+function emailGenHTML(l){
+  return `<div class="emailgen">
+    <div class="eg-head"><span class="t">Personalised draft for ${l.name}</span><span style="font-size:12px;color:#64748b">Channel: ${l.channel}</span></div>
+    <div class="eg-controls">
+      <div class="grp"><span class="gl">Tone</span>
+        <button class="toggle on" data-tone="warm" onclick="setTone(this)">Warm</button>
+        <button class="toggle" data-tone="professional" onclick="setTone(this)">Professional</button>
+        <button class="toggle" data-tone="bold" onclick="setTone(this)">Bold</button>
+      </div>
+      <div class="grp"><span class="gl">Length</span>
+        <button class="toggle on" data-len="standard" onclick="setLen(this)">Standard</button>
+        <button class="toggle" data-len="short" onclick="setLen(this)">Short</button>
+      </div>
+      <button class="toggle" onclick="renderEmail()" style="margin-left:auto">↻ Regenerate</button>
+    </div>
+    <div class="eg-body">
+      <label>Subject</label><input id="egSubject" type="text">
+      <label>Body</label><textarea id="egBody"></textarea>
+      <div class="eg-actions">
+        <button class="btn primary" onclick="copyEmail()">📋 Copy full email</button>
+        <button class="btn" onclick="copyEl('egBody','Body copied')">Copy body only</button>
+        <button class="btn" onclick="openMail()">✉️ Open in mail app</button>
+      </div>
+      <div class="eg-note">⚠️ This is a draft for you to review and send yourself — nothing is sent automatically. The proof-point line auto-fills from your Business Profile once you customise.</div>
+    </div>
+  </div>`;
+}
+const TONES={
+  warm:{
+    subj:(n)=>`A quick idea for ${n}`,
+    greet:(n)=>`Hi ${n} team,`,
+    obs:(n,gap)=>`I've been following ${n} and genuinely rate what you do — the one thing that jumped out at me is that ${gap}.`,
+    bridge:(s)=>`That's exactly the gap we help close: ${s}.`,
+    proof:()=>`For a bit of context — [drop your best proof point here, e.g. "we grew a local café's Instagram from 2k to 18k in four months"]. (This line auto-fills from your Business Profile once you customise.)`,
+    cta:()=>`If you're open to it, I'd love to send over 2–3 concepts made specifically for you — no cost, no pressure. Worth a look?`,
+    sign:(b,e)=>`Cheers,\n${b}\n${e}`
+  },
+  professional:{
+    subj:(n)=>`Short-form video for ${n}`,
+    greet:(n)=>`Hello ${n} team,`,
+    obs:(n,gap)=>`I've been reviewing ${n}'s online presence and noticed that ${gap}.`,
+    bridge:(s)=>`We specialise in exactly this: ${s}.`,
+    proof:()=>`For reference — [insert a relevant result/case study here]. (Auto-fills from your Business Profile once you customise.)`,
+    cta:()=>`Would you be open to a brief call this week to talk through a couple of tailored ideas? I can also send concepts in advance.`,
+    sign:(b,e)=>`Best regards,\n${b}\n${e}`
+  },
+  bold:{
+    subj:(n)=>`${n} is leaving reach on the table`,
+    greet:(n)=>`Hey ${n} team,`,
+    obs:(n,gap)=>`Straight up: ${gap} — and your competitors are already eating that attention.`,
+    bridge:(s)=>`We fix exactly that, fast: ${s}.`,
+    proof:()=>`Proof we can back it up — [drop your strongest result here]. (Auto-fills from your Business Profile once you customise.)`,
+    cta:()=>`Give me 15 minutes and I'll show you 3 concepts built for you. If they don't excite you, no harm done.`,
+    sign:(b,e)=>`Talk soon,\n${b}\n${e}`
+  }
+};
+function getGap(l){
+  if(l.deep&&l.opportunities&&l.opportunities[0]) return l.opportunities[0].title.charAt(0).toLowerCase()+l.opportunities[0].title.slice(1);
+  if(l.signals&&l.signals[0]) return l.signals[0].t.charAt(0).toLowerCase()+l.signals[0].t.slice(1);
+  return "your digital presence has real room to grow";
+}
+function setTone(el){el.parentElement.querySelectorAll(".toggle").forEach(t=>t.classList.remove("on"));el.classList.add("on");egTone=el.dataset.tone;renderEmail();}
+function setLen(el){el.parentElement.querySelectorAll(".toggle").forEach(t=>t.classList.remove("on"));el.classList.add("on");egLength=el.dataset.len;renderEmail();}
+function renderEmail(){
+  const l=LEADS.find(x=>x.rank===dossierRank);if(!l)return;
+  const T=TONES[egTone], gap=getGap(l), biz=(login&&login.biz)||"[Your Business]", email=(login&&login.email)||"[your email]";
+  let parts=[T.greet(l.name), T.obs(l.name,gap), T.bridge(l.service)];
+  if(egLength==="standard") parts.push(T.proof());
+  parts.push(T.cta(), T.sign(biz,email));
+  document.getElementById("egSubject").value=T.subj(l.name);
+  document.getElementById("egBody").value=parts.join("\n\n");
+}
+function copyEl(id,msg){const e=document.getElementById(id);e.select();navigator.clipboard.writeText(e.value);toast(msg);}
+function copyEmail(){const s=document.getElementById("egSubject").value,b=document.getElementById("egBody").value;navigator.clipboard.writeText("Subject: "+s+"\n\n"+b);toast("Full email copied");}
+function openMail(){const s=encodeURIComponent(document.getElementById("egSubject").value),b=encodeURIComponent(document.getElementById("egBody").value);window.location.href=`mailto:?subject=${s}&body=${b}`;}
+function toast(m){const t=document.createElement("div");t.textContent="✓ "+m;t.style.cssText="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0f172a;color:#fff;padding:10px 18px;border-radius:9px;font-size:13px;font-weight:600;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.3)";document.body.appendChild(t);setTimeout(()=>t.remove(),1500);}
+
+/* ================= CSV + digest ================= */
 function exportCSV(){
   const rows=current();
   const cols=["rank","name","vertical","location","region","geo","size","presence","tag","fit","tier","service","value","channel","status"];
-  const head=cols.join(",");
-  const body=rows.map(l=>cols.map(c=>{
-    let v= c==="status"?statusOf(l):l[c];
-    v=(""+v).replace(/"/g,'""');
-    return `"${v}"`;
-  }).join(",")).join("\n");
-  const blob=new Blob([head+"\n"+body],{type:"text/csv"});
+  const body=rows.map(l=>cols.map(c=>`"${(""+(c==="status"?statusOf(l):l[c])).replace(/"/g,'""')}"`).join(",")).join("\n");
+  const blob=new Blob([cols.join(",")+"\n"+body],{type:"text/csv"});
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="leads_2026-05-30.csv";a.click();
 }
-
-/* ---------- Email digest ---------- */
 function buildDigest(){
   const top=[...LEADS].sort((x,y)=>y.fit-x.fit).slice(0,10);
   digestCards.innerHTML=top.map(l=>`
@@ -545,27 +930,21 @@ function buildDigest(){
       <div class="mw">${l.vertical} · ${l.location}, ${l.region} · ${l.size} · <span class="badge g-${l.geo}">${l.geo}</span></div>
       <div class="mw"><b>Why:</b> ${l.why}</div>
       <div class="mh">"${l.hook}"</div>
-      <div class="mc"><b>Lead with:</b> ${l.service} · <b>Value:</b> ${l.value} · <b>Reach via:</b> ${l.channel}</div>
+      <div class="mw" style="margin-top:7px"><b>Lead with:</b> ${l.service} · <b>Value:</b> ${l.value} · <b>Via:</b> ${l.channel}</div>
     </div>`).join("");
 }
 function copyDigest(){
   const top=[...LEADS].sort((x,y)=>y.fit-x.fit).slice(0,10);
-  let txt="Today's top 10 leads (25 total — full set in dashboard)\n\n";
+  let txt=`Today's top 10 leads (25 total — full dossiers in dashboard)\nDelivered to: ${(login&&login.email)||""}\n\n`;
   top.forEach(l=>{txt+=`#${l.rank} ${l.name} — ${l.vertical}, ${l.location} (${l.geo}) — Tier ${l.tier}, fit ${l.fit}\nWhy: ${l.why}\nHook: "${l.hook}"\nLead with: ${l.service} | Value: ${l.value} | Via: ${l.channel}\n\n`;});
-  navigator.clipboard.writeText(txt);
-  event.target.textContent="✓ Copied to clipboard";setTimeout(()=>event.target.textContent="📋 Copy digest as text",1600);
+  navigator.clipboard.writeText(txt);toast("Digest copied");
 }
+function showView(v){const dash=v==="dash";document.getElementById("dash").style.display=dash?"block":"none";document.getElementById("digest").style.display=dash?"none":"block";tabDash.classList.toggle("on",dash);tabDigest.classList.toggle("on",!dash);}
 
-function showView(v){
-  const dash=v==="dash";
-  document.getElementById("dash").style.display=dash?"block":"none";
-  document.getElementById("digest").style.display=dash?"none":"block";
-  tabDash.classList.toggle("on",dash); tabDigest.classList.toggle("on",!dash);
-}
-
-/* ---------- Init ---------- */
-buildSummary(); render(); buildDigest();
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closePanel();});
+/* ================= Init ================= */
+applyLogin();buildSummary();render();buildDigest();
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closePanel();closeDossier();}});
+document.getElementById("gEmail").addEventListener("keydown",e=>{if(e.key==="Enter")doLogin();});
 </script>
 </body>
 </html>
