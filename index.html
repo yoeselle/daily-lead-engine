@@ -32,6 +32,19 @@
   .gateerr{color:#dc2626;font-size:12px;margin-top:8px;display:none}
   .gatenote{font-size:11px;color:#94a3b8;margin-top:16px;line-height:1.45}
 
+  /* Profile editor */
+  .pfback{position:fixed;inset:0;background:rgba(15,23,42,.5);opacity:0;pointer-events:none;transition:.18s;z-index:105}
+  .pfback.on{opacity:1;pointer-events:auto}
+  .pfmodal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.98);opacity:0;pointer-events:none;transition:.18s;z-index:110;background:#fff;border-radius:16px;width:min(560px,94vw);max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.4);padding:26px 28px}
+  .pfmodal.on{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+  .pfmodal h2{margin:0 0 4px;font-size:19px}
+  .pfmodal .psub{color:var(--muted);font-size:12.5px;margin:0 0 16px}
+  .pfmodal label{font-size:11px;font-weight:700;color:#334155;text-transform:uppercase;letter-spacing:.03em;display:block;margin:12px 0 4px}
+  .pfmodal input,.pfmodal textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-size:13.5px;font-family:inherit}
+  .pfmodal textarea{min-height:58px;resize:vertical}
+  .pf-site-note{background:#eef2ff;border:1px solid #ddd6fe;border-radius:9px;padding:10px 12px;font-size:12px;color:#3730a3;margin:8px 0 4px}
+  .pf-actions{display:flex;gap:8px;margin-top:18px}
+
   /* Header */
   header{background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;padding:16px 24px}
   .head-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;max-width:1400px;margin:0 auto}
@@ -204,11 +217,13 @@
   <div class="gatecard">
     <div class="logo">LE</div>
     <h1>Sign in to your Lead Engine</h1>
-    <p>Your email becomes where the daily digest is delivered and the signature on your outreach drafts. Nothing is ever sent without you.</p>
+    <p>Sign in with your email (where the digest is delivered + your draft signature) and your business, so the dashboard works for <i>you</i> — not just the demo. Nothing is ever sent without you.</p>
     <label for="gEmail">Your email *</label>
     <input id="gEmail" type="email" placeholder="you@yourbusiness.com" autocomplete="email">
-    <label for="gBiz">Business name (optional)</label>
+    <label for="gBiz">Business name</label>
     <input id="gBiz" type="text" placeholder="e.g. Capri Media">
+    <label for="gSite">Business website (optional — the engine can build your profile from it)</label>
+    <input id="gSite" type="text" placeholder="yourbusiness.com">
     <div class="gateerr" id="gErr">Please enter a valid email address.</div>
     <button class="gatebtn" onclick="doLogin()">Enter dashboard →</button>
     <div class="gatenote">This is a lightweight sign-in (no password, stored only in this browser) — it sets your delivery address and personalises the dashboard. It is not secure authentication.</div>
@@ -225,7 +240,8 @@
       </div>
     </div>
     <div class="acct">
-      Signed in as <b id="acctEmail">—</b><br><a onclick="doLogout()">Log out</a>
+      <button class="btn" style="background:#1e293b;color:#fff;border-color:#334155;margin-bottom:5px" onclick="openProfile()">⚙ Business profile</button><br>
+      Signed in as <b id="acctEmail">—</b> · <a onclick="doLogout()">Log out</a>
     </div>
   </div>
   <div class="meta">
@@ -319,6 +335,27 @@
 <!-- Quick panel -->
 <div class="overlay" id="overlay" onclick="closePanel()"></div>
 <aside class="panel" id="panel"></aside>
+
+<!-- Profile editor -->
+<div class="pfback" id="pfBack" onclick="closeProfile()"></div>
+<div class="pfmodal" id="pfModal">
+  <h2>Business profile</h2>
+  <p class="psub">This personalises the dashboard, fit-scoring and your outreach drafts. Anyone can point it at their own business.</p>
+  <label>Business name</label><input id="pfBiz" type="text">
+  <label>Website</label><input id="pfSite" type="text" placeholder="yourbusiness.com">
+  <div class="pf-site-note">💡 Paste your website and on the next live run the engine researches it to auto-fill the fields below. Or fill them in manually now.</div>
+  <label>What you do</label><textarea id="pfWhat"></textarea>
+  <label>Services you sell</label><textarea id="pfServices"></textarea>
+  <label>Who you serve best</label><textarea id="pfServes"></textarea>
+  <label>Positioning &amp; style</label><input id="pfPositioning" type="text">
+  <label>Typical pricing / deal size</label><input id="pfPricing" type="text">
+  <label>Proof point (used in your outreach drafts)</label><textarea id="pfProof" placeholder='e.g. "grew a local cafe IG from 2k to 18k in 4 months"'></textarea>
+  <label>Preferred outreach channel</label><input id="pfChannel" type="text">
+  <div class="pf-actions">
+    <button class="btn primary" onclick="saveProfile()">Save profile</button>
+    <button class="btn" onclick="closeProfile()">Cancel</button>
+  </div>
+</div>
 
 <!-- Full dossier -->
 <div class="dossier" id="dossier"></div>
@@ -669,8 +706,12 @@ let login=JSON.parse(localStorage.getItem(LOGIN_KEY)||"null");
 function doLogin(){
   const email=document.getElementById("gEmail").value.trim();
   const biz=document.getElementById("gBiz").value.trim();
+  const website=document.getElementById("gSite").value.trim();
   if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){document.getElementById("gErr").style.display="block";return;}
-  login={email,biz};localStorage.setItem(LOGIN_KEY,JSON.stringify(login));applyLogin();
+  login={email};localStorage.setItem(LOGIN_KEY,JSON.stringify(login));
+  if(biz) profile.biz=biz;
+  if(website) profile.website=website;
+  saveProfileObj();applyLogin();
 }
 function doLogout(){localStorage.removeItem(LOGIN_KEY);login=null;document.getElementById("gate").classList.remove("hide");}
 function applyLogin(){
@@ -678,7 +719,23 @@ function applyLogin(){
   document.getElementById("gate").classList.add("hide");
   document.getElementById("acctEmail").textContent=login.email;
   document.getElementById("dTo").textContent=login.email;
-  document.getElementById("bizName").textContent=(login.biz||"[Your Business]")+" — Daily Lead Engine";
+  applyProfile();
+}
+
+/* ================= Business profile (customizable) ================= */
+const PROFILE_KEY="leadEngineProfile_v1";
+const PROFILE_DEFAULT={biz:"Capri Media",website:"",what:"Short-form video & social content for local lifestyle brands.",services:"Reels/TikTok production, social media management, content shoots, ad creative",serves:"Hospitality, fitness, beauty & boutique retail",positioning:"Premium, bold, visually-led",pricing:"",proof:"",channel:"Public business email or IG DM"};
+let profile=Object.assign({},PROFILE_DEFAULT,JSON.parse(localStorage.getItem(PROFILE_KEY)||"null")||{});
+function saveProfileObj(){localStorage.setItem(PROFILE_KEY,JSON.stringify(profile));}
+function applyProfile(){document.getElementById("bizName").textContent=(profile.biz||"[Your Business]")+" — Daily Lead Engine";}
+function openProfile(){
+  pfBiz.value=profile.biz||"";pfSite.value=profile.website||"";pfWhat.value=profile.what||"";pfServices.value=profile.services||"";pfServes.value=profile.serves||"";pfPositioning.value=profile.positioning||"";pfPricing.value=profile.pricing||"";pfProof.value=profile.proof||"";pfChannel.value=profile.channel||"";
+  document.getElementById("pfBack").classList.add("on");document.getElementById("pfModal").classList.add("on");
+}
+function closeProfile(){document.getElementById("pfBack").classList.remove("on");document.getElementById("pfModal").classList.remove("on");}
+function saveProfile(){
+  profile={biz:pfBiz.value.trim(),website:pfSite.value.trim(),what:pfWhat.value.trim(),services:pfServices.value.trim(),serves:pfServes.value.trim(),positioning:pfPositioning.value.trim(),pricing:pfPricing.value.trim(),proof:pfProof.value.trim(),channel:pfChannel.value.trim()};
+  saveProfileObj();applyProfile();closeProfile();toast("Profile saved");
 }
 
 /* ================= State ================= */
@@ -900,11 +957,16 @@ function getGap(l){
 }
 function setTone(el){el.parentElement.querySelectorAll(".toggle").forEach(t=>t.classList.remove("on"));el.classList.add("on");egTone=el.dataset.tone;renderEmail();}
 function setLen(el){el.parentElement.querySelectorAll(".toggle").forEach(t=>t.classList.remove("on"));el.classList.add("on");egLength=el.dataset.len;renderEmail();}
+function proofLine(tone,p){
+  const pre={warm:"For a bit of context — ",professional:"For reference — ",bold:"Proof we back it up — "}[tone]||"";
+  return pre+p+(/[.!?]$/.test(p)?"":".");
+}
 function renderEmail(){
   const l=LEADS.find(x=>x.rank===dossierRank);if(!l)return;
-  const T=TONES[egTone], gap=getGap(l), biz=(login&&login.biz)||"[Your Business]", email=(login&&login.email)||"[your email]";
+  const T=TONES[egTone], gap=getGap(l), biz=(profile&&profile.biz)||"[Your Business]", email=(login&&login.email)||"[your email]";
+  const proofText=(profile&&profile.proof&&profile.proof.trim())?profile.proof.trim():"";
   let parts=[T.greet(l.name), T.obs(l.name,gap), T.bridge(l.service)];
-  if(egLength==="standard") parts.push(T.proof());
+  if(egLength==="standard") parts.push(proofText?proofLine(egTone,proofText):T.proof());
   parts.push(T.cta(), T.sign(biz,email));
   document.getElementById("egSubject").value=T.subj(l.name);
   document.getElementById("egBody").value=parts.join("\n\n");
