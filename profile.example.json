@@ -1,0 +1,32 @@
+{
+  "_comment": "Copy this file to profile.json and fill in YOUR details — this drives all research, scoring and outreach drafts.",
+
+  "businessName": "Capri Media",
+  "website": "caprimedia.com.au",
+
+  "services": "Short-form video production, Reels, TikTok content, social media management, ad creative",
+  "whatYouDo": "We create scroll-stopping Reels and short-form video for local businesses — cafés, gyms, salons, boutiques — and manage the whole social presence end-to-end.",
+  "whoYouServe": "Hospitality, fitness, beauty, and boutique retail businesses with a physical location, good product, and a digital presence gap.",
+  "positioning": "Premium, bold, visually-led — we don't do generic content",
+
+  "location": "Perth, WA",
+  "targetLocations": [
+    "Perth, WA",
+    "Sydney, NSW",
+    "Melbourne, VIC"
+  ],
+  "internationalLocations": [
+    "Auckland, NZ",
+    "Singapore"
+  ],
+  "targetVerticals": [
+    "Hospitality",
+    "Fitness",
+    "Beauty",
+    "Retail",
+    "Health & Wellness"
+  ],
+
+  "proofPoint": "grew a local café's Instagram from 2,000 to 18,000 followers in 4 months with a Reels retainer",
+  "pricing": "$1,500–4,000 / month retainer"
+}

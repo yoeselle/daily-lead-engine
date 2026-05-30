@@ -1,0 +1,15 @@
+{
+  "name": "daily-lead-engine",
+  "version": "2.0.0",
+  "description": "AI-powered daily lead research engine — real, web-verified leads via Claude + web search",
+  "scripts": {
+    "research": "node research-agent.js",
+    "serve": "npx serve . -l 8080 --no-clipboard"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.52.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
