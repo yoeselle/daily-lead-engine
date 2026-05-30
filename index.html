@@ -257,6 +257,7 @@
   <div class="tabs">
     <div class="tab on" id="tabDash" onclick="showView('dash')">📊 Dashboard</div>
     <div class="tab" id="tabDigest" onclick="showView('digest')">✉️ Email digest</div>
+    <div class="tab" id="tabHistory" onclick="showView('history')">🕘 History</div>
   </div>
 
   <div id="dash">
@@ -330,6 +331,7 @@
       </div>
     </div>
   </div>
+  <div id="history" style="display:none"></div>
 </div>
 
 <!-- Quick panel -->
@@ -364,7 +366,7 @@
 
 <script>
 /* ================= SAMPLE DATA (placeholder — replaced on customization) ================= */
-const LEADS=[
+const DEMO_LEADS=[
  {rank:1,name:"Sol & Salt Café",vertical:"Hospitality",location:"Cottesloe",region:"Perth, WA",geo:"local",size:"1 venue · ~15 staff",presence:2,tag:"great food, dormant IG",fit:89,tier:"A",deep:true,
   founded:"Est. 2017",priceTier:"Mid-premium ($$)",
   overview:"Beachside all-day café known for brunch and specialty coffee. Single high-traffic Cottesloe location, consistently busy on weekends. Strong product and loyal walk-in trade, but the brand barely exists online — a classic high-leverage content play.",
@@ -700,6 +702,12 @@ const LEADS=[
   value:"$1–2k/mo",dm:"unknown",channel:"IG DM @ridgelinecycles",sources:["https://instagram.com/ridgelinecycles"]}
 ];
 
+/* ================= RUNS (daily history; demo fallback) ================= */
+const RUNS=(typeof window!=="undefined"&&window.RUNS&&window.RUNS.length)?window.RUNS.slice():[{date:"2026-05-30",label:"Sample data (demo)",meta:{sample:true},leads:DEMO_LEADS}];
+RUNS.sort(function(a,b){return String(b.date||"").localeCompare(String(a.date||""));});
+let activeRun=0;
+let LEADS=(RUNS[0]&&RUNS[0].leads)?RUNS[0].leads:[];
+
 /* ================= Login ================= */
 const LOGIN_KEY="leadEngineLogin_v1";
 let login=JSON.parse(localStorage.getItem(LOGIN_KEY)||"null");
@@ -1001,10 +1009,42 @@ function copyDigest(){
   top.forEach(l=>{txt+=`#${l.rank} ${l.name} — ${l.vertical}, ${l.location} (${l.geo}) — Tier ${l.tier}, fit ${l.fit}\nWhy: ${l.why}\nHook: "${l.hook}"\nLead with: ${l.service} | Value: ${l.value} | Via: ${l.channel}\n\n`;});
   navigator.clipboard.writeText(txt);toast("Digest copied");
 }
-function showView(v){const dash=v==="dash";document.getElementById("dash").style.display=dash?"block":"none";document.getElementById("digest").style.display=dash?"none":"block";tabDash.classList.toggle("on",dash);tabDigest.classList.toggle("on",!dash);}
+function showView(v){
+  ["dash","digest","history"].forEach(function(id){var e=document.getElementById(id); if(e) e.style.display=(id===v)?"block":"none";});
+  var td=document.getElementById("tabDash"),tg=document.getElementById("tabDigest"),th=document.getElementById("tabHistory");
+  if(td) td.classList.toggle("on",v==="dash"); if(tg) tg.classList.toggle("on",v==="digest"); if(th) th.classList.toggle("on",v==="history");
+  if(v==="history") renderHistory();
+}
+
+/* ================= History / run switching ================= */
+function updateRunHeader(){
+  var r=RUNS[activeRun]||{};
+  var d=document.getElementById("runDate"); if(d) d.textContent=r.label||r.date||"—";
+  var t=document.getElementById("runTotal"); if(t) t.textContent=(r.leads?r.leads.length:0);
+}
+function loadRun(i){
+  if(i<0||i>=RUNS.length) return;
+  activeRun=i; LEADS=(RUNS[i].leads)||[];
+  closeDossier(); closePanel();
+  buildSummary(); render(); buildDigest(); updateRunHeader(); renderHistory();
+  showView("dash"); window.scrollTo(0,0);
+}
+function renderHistory(){
+  var el=document.getElementById("history"); if(!el) return;
+  if(!RUNS.length){ el.innerHTML='<div class="card"><div class="lab">🕘 Run history</div><p style="font-size:13px;color:#64748b;margin-top:6px">No runs stored yet — each daily run will appear here.</p></div>'; return; }
+  var head='<div class="card" style="margin-bottom:14px"><div class="lab">🕘 Run history</div><p style="font-size:13px;color:#475569;margin:6px 0 0">Every daily run is stored here so you can go back to any day. Newest first. (The daily automation appends a new run each morning.)</p></div>';
+  el.innerHTML=head+RUNS.map(function(r,i){
+    var ls=r.leads||[]; var tiers=ls.reduce(function(a,l){a[l.tier]=(a[l.tier]||0)+1;return a;},{});
+    var active=(i===activeRun);
+    return '<div class="card" style="margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:12px;'+(active?"border-color:#6366f1;box-shadow:0 0 0 2px #c7d2fe":"")+'">'+
+      '<div><div style="font-weight:800;font-size:15px">'+(r.label||r.date||"Run")+(i===0?' <span class="badge t-A" style="font-size:10px">LATEST</span>':"")+(active?' <span style="font-size:11px;color:#6366f1;font-weight:700">• viewing</span>':"")+'</div>'+
+      '<div style="font-size:12.5px;color:#64748b;margin-top:3px">'+ls.length+' leads · A:'+(tiers.A||0)+' B:'+(tiers.B||0)+' C:'+(tiers.C||0)+(r.meta&&r.meta.verified?' · '+r.meta.verified+'/'+(r.meta.researched||"?")+' verified':"")+'</div></div>'+
+      '<button class="btn primary" onclick="loadRun('+i+')">View this day →</button></div>';
+  }).join("");
+}
 
 /* ================= Init ================= */
-applyLogin();buildSummary();render();buildDigest();
+applyLogin();buildSummary();render();buildDigest();updateRunHeader();renderHistory();
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closePanel();closeDossier();}});
 document.getElementById("gEmail").addEventListener("keydown",e=>{if(e.key==="Enter")doLogin();});
 </script>
